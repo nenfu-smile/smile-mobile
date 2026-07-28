@@ -36,12 +36,14 @@ This architecture separates routing concerns from UI logic, organizing code by f
 ### 1. Separation of Routing and UI Logic
 
 **Routes** (`app/` directory):
+
 - Thin wrappers that import screen components
 - Handle navigation structure
 - Configure animations and layouts
 - 3-5 lines of code maximum
 
 **Screens** (`src/features/` directory):
+
 - Contain all UI logic and state
 - Handle business logic
 - Manage data fetching
@@ -50,6 +52,7 @@ This architecture separates routing concerns from UI logic, organizing code by f
 ### 2. Feature-Based Organization
 
 Group related functionality together:
+
 ```
 src/features/auth/
 ├── api/           # API calls
@@ -63,6 +66,7 @@ src/features/auth/
 ### 3. Single Responsibility
 
 Each file has one clear purpose:
+
 - Routes only handle navigation
 - Screens only handle UI
 - Hooks only handle logic
@@ -155,15 +159,16 @@ your-app/
 ### Route File Pattern
 
 **Before (Bad):**
+
 ```typescript
 // app/(auth)/login.tsx
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const login = useLogin();
-  
+
   // 200+ lines of implementation
-  
+
   return (
     <View>
       {/* Complex UI */}
@@ -173,6 +178,7 @@ export default function Login() {
 ```
 
 **After (Good):**
+
 ```typescript
 // app/(auth)/login/index.tsx
 import React from "react";
@@ -283,21 +289,21 @@ export function LoginScreen() {
   return (
     <View className="flex-1 p-5 bg-white">
       <Text className="text-2xl font-bold">Welcome Back</Text>
-      
+
       <Input
         value={email}
         onChangeText={setEmail}
         placeholder="Email"
         keyboardType="email-address"
       />
-      
+
       <Input
         value={password}
         onChangeText={setPassword}
         placeholder="Password"
         secureTextEntry
       />
-      
+
       <Button onPress={handleLogin} loading={login.isPending}>
         <Text className="text-white">Login</Text>
       </Button>
@@ -310,9 +316,9 @@ export function LoginScreen() {
 
 ```typescript
 // src/features/auth/screens/index.ts
-export { LoginScreen } from './LoginScreen';
-export { RegisterScreen } from './RegisterScreen';
-export { OTPScreen } from './OTPScreen';
+export { LoginScreen } from "./LoginScreen";
+export { RegisterScreen } from "./RegisterScreen";
+export { OTPScreen } from "./OTPScreen";
 ```
 
 ---
@@ -323,9 +329,9 @@ export { OTPScreen } from './OTPScreen';
 
 ```typescript
 // src/shared/store/index.ts
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { MMKV } from 'react-native-mmkv';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { MMKV } from "react-native-mmkv";
 
 const storage = new MMKV();
 
@@ -353,30 +359,31 @@ export const useStore = create<AppState>()(
       logout: () => set({ user: null, token: null }),
     }),
     {
-      name: 'app-storage',
+      name: "app-storage",
       storage: createJSONStorage(() => zustandStorage),
-    }
-  )
+    },
+  ),
 );
 
 // Selectors
 export const useUser = () => useStore((state) => state.user);
 export const useToken = () => useStore((state) => state.token);
-export const useAuthActions = () => useStore((state) => ({
-  setUser: state.setUser,
-  setToken: state.setToken,
-  logout: state.logout,
-}));
+export const useAuthActions = () =>
+  useStore((state) => ({
+    setUser: state.setUser,
+    setToken: state.setToken,
+    logout: state.logout,
+  }));
 ```
 
 ### Server State (React Query)
 
 ```typescript
 // src/features/auth/hooks/use-login.ts
-import { useMutation } from '@tanstack/react-query';
-import { authApi } from '../api/auth-api';
-import { useAuthActions } from '@/shared/store';
-import { toast } from 'sonner-native';
+import { useMutation } from "@tanstack/react-query";
+import { authApi } from "../api/auth-api";
+import { useAuthActions } from "@/shared/store";
+import { toast } from "sonner-native";
 
 export function useLogin() {
   const { setUser, setToken } = useAuthActions();
@@ -386,10 +393,10 @@ export function useLogin() {
     onSuccess: (data) => {
       setUser(JSON.stringify(data.user));
       setToken(data.token);
-      toast.success('Login successful');
+      toast.success("Login successful");
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Login failed');
+      toast.error(error.message || "Login failed");
     },
   });
 }
@@ -403,15 +410,15 @@ export function useLogin() {
 
 ```typescript
 // src/services/api/client.ts
-import axios from 'axios';
-import { useStore } from '@/shared/store';
+import axios from "axios";
+import { useStore } from "@/shared/store";
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 
 export const apiClient = axios.create({
   baseURL: API_URL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -424,7 +431,7 @@ apiClient.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 // Response interceptor
@@ -435,7 +442,7 @@ apiClient.interceptors.response.use(
       useStore.getState().logout();
     }
     return Promise.reject(error);
-  }
+  },
 );
 ```
 
@@ -443,26 +450,26 @@ apiClient.interceptors.response.use(
 
 ```typescript
 // src/features/auth/api/auth-api.ts
-import { apiClient } from '@/services/api/client';
-import { LoginData, RegisterData, AuthResponse } from '../types/auth.types';
+import { apiClient } from "@/services/api/client";
+import { LoginData, RegisterData, AuthResponse } from "../types/auth.types";
 
 export const authApi = {
   login: async (data: LoginData): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/login', data);
+    const response = await apiClient.post("/auth/login", data);
     return response.data;
   },
 
   register: async (data: RegisterData): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/register', data);
+    const response = await apiClient.post("/auth/register", data);
     return response.data;
   },
 
   logout: async (): Promise<void> => {
-    await apiClient.post('/auth/logout');
+    await apiClient.post("/auth/logout");
   },
 
   verifyOTP: async (otp: string): Promise<AuthResponse> => {
-    const response = await apiClient.post('/auth/verify-otp', { otp });
+    const response = await apiClient.post("/auth/verify-otp", { otp });
     return response.data;
   },
 };
@@ -476,7 +483,7 @@ export const authApi = {
 
 ```typescript
 // src/services/storage/storage-service.ts
-import { MMKV } from 'react-native-mmkv';
+import { MMKV } from "react-native-mmkv";
 
 export const storage = new MMKV();
 
@@ -540,20 +547,20 @@ export const storageService = {
 // src/services/storage/storage-keys.ts
 export const STORAGE_KEYS = {
   // Auth
-  USER: 'user',
-  TOKEN: 'token',
-  REFRESH_TOKEN: 'refresh_token',
-  
+  USER: "user",
+  TOKEN: "token",
+  REFRESH_TOKEN: "refresh_token",
+
   // Onboarding
-  ONBOARDING_COMPLETED: 'onboarding_completed',
-  
+  ONBOARDING_COMPLETED: "onboarding_completed",
+
   // Settings
-  THEME: 'theme',
-  LANGUAGE: 'language',
-  NOTIFICATIONS_ENABLED: 'notifications_enabled',
-  
+  THEME: "theme",
+  LANGUAGE: "language",
+  NOTIFICATIONS_ENABLED: "notifications_enabled",
+
   // Cache
-  CACHED_DATA: 'cached_data',
+  CACHED_DATA: "cached_data",
 } as const;
 ```
 
@@ -634,9 +641,9 @@ export function Header({ title, showBack = true, rightComponent }: HeaderProps) 
       ) : (
         <View className="w-6" />
       )}
-      
+
       <Text className="text-lg font-bold">{title}</Text>
-      
+
       {rightComponent || <View className="w-6" />}
     </View>
   );
@@ -665,45 +672,43 @@ npm install --save-dev tailwindcss
 ```typescript
 // tailwind.config.js
 module.exports = {
-  content: [
-    './app/**/*.{js,jsx,ts,tsx}',
-    './src/**/*.{js,jsx,ts,tsx}',
-  ],
-  presets: [require('nativewind/preset')],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
+  presets: [require("nativewind/preset")],
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#DA100B',
-          50: '#FEE2E2',
-          100: '#FECACA',
-          200: '#FCA5A5',
-          300: '#F87171',
-          400: '#EF4444',
-          500: '#DA100B',
-          600: '#B91C1C',
-          700: '#991B1B',
-          800: '#7F1D1D',
-          900: '#6B1515',
+          DEFAULT: "#FF660A",
+          50: "#fff6ec",
+          100: "#ffebd3",
+          200: "#ffd3a5",
+          300: "#ffb46d",
+          400: "#ff8832",
+          500: "#ff660a",
+          600: "#ff4d01",
+          700: "#cc3402",
+          800: "#a12a0b",
+          900: "#82250c",
         },
         secondary: {
-          DEFAULT: '#8AC53F',
-          50: '#F0F9E8',
-          100: '#E1F3D1',
-          200: '#C3E7A3',
-          300: '#A5DB75',
-          400: '#8AC53F',
-          500: '#6FA32F',
-          600: '#548123',
-          700: '#3F6119',
-          800: '#2A400F',
-          900: '#152005',
+          DEFAULT: "#8AC53F",
+          50: "#faffe6",
+          100: "#f1fec9",
+          200: "#e3fd99",
+          300: "#cdf85e",
+          "400": "#beef46",
+          "500": "#97d30f",
+          "600": "#74a907",
+          "700": "#58800b",
+          "800": "#47650f",
+          "900": "#3c5512",
+          "950": "#1e3003",
         },
       },
       fontFamily: {
-        'dm-sans': ['DMSans-Regular'],
-        'dm-sans-medium': ['DMSans-Medium'],
-        'dm-sans-bold': ['DMSans-Bold'],
+        "dm-sans": ["DMSans-Regular"],
+        "dm-sans-medium": ["DMSans-Medium"],
+        "dm-sans-bold": ["DMSans-Bold"],
       },
     },
   },
@@ -716,13 +721,8 @@ module.exports = {
 module.exports = function (api) {
   api.cache(true);
   return {
-    presets: [
-      ['babel-preset-expo', { jsxImportSource: 'nativewind' }],
-    ],
-    plugins: [
-      'nativewind/babel',
-      'react-native-reanimated/plugin',
-    ],
+    presets: [["babel-preset-expo", { jsxImportSource: "nativewind" }]],
+    plugins: ["nativewind/babel", "react-native-reanimated/plugin"],
   };
 };
 ```
@@ -738,6 +738,7 @@ npx @react-native-reusables/cli@latest init
 ```
 
 This will:
+
 - Set up the components directory
 - Configure theme colors
 - Add necessary dependencies
@@ -876,20 +877,20 @@ export { Input };
 // src/lib/constants.ts
 export const NAV_THEME = {
   light: {
-    background: 'hsl(0 0% 100%)',
-    border: 'hsl(240 5.9% 90%)',
-    card: 'hsl(0 0% 100%)',
-    notification: 'hsl(0 84.2% 60.2%)',
-    primary: 'hsl(355 84% 44%)',
-    text: 'hsl(240 10% 3.9%)',
+    background: "hsl(0 0% 100%)",
+    border: "hsl(240 5.9% 90%)",
+    card: "hsl(0 0% 100%)",
+    notification: "hsl(0 84.2% 60.2%)",
+    primary: "hsl(355 84% 44%)",
+    text: "hsl(240 10% 3.9%)",
   },
   dark: {
-    background: 'hsl(240 10% 3.9%)',
-    border: 'hsl(240 3.7% 15.9%)',
-    card: 'hsl(240 10% 3.9%)',
-    notification: 'hsl(0 72% 51%)',
-    primary: 'hsl(355 84% 44%)',
-    text: 'hsl(0 0% 98%)',
+    background: "hsl(240 10% 3.9%)",
+    border: "hsl(240 3.7% 15.9%)",
+    card: "hsl(240 10% 3.9%)",
+    notification: "hsl(0 72% 51%)",
+    primary: "hsl(355 84% 44%)",
+    text: "hsl(0 0% 98%)",
   },
 };
 ```
@@ -1023,8 +1024,8 @@ export function LoginScreen() {
 
 ```typescript
 // src/lib/utils.ts
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -1069,6 +1070,7 @@ mkdir -p src/features/auth/hooks
 #### 3. Extract Screen Component
 
 **From:**
+
 ```typescript
 // app/(auth)/login.tsx
 export default function Login() {
@@ -1077,6 +1079,7 @@ export default function Login() {
 ```
 
 **To:**
+
 ```typescript
 // src/features/auth/screens/LoginScreen.tsx
 export function LoginScreen() {
@@ -1128,7 +1131,7 @@ npx expo start
 - [ ] Move screen implementation to feature/screens
 - [ ] Create index.ts with exports
 - [ ] Update route file to import screen
-- [ ] Add _layout.tsx for animations
+- [ ] Add \_layout.tsx for animations
 - [ ] Move API calls to feature/api
 - [ ] Move hooks to feature/hooks
 - [ ] Move types to feature/types
@@ -1144,47 +1147,47 @@ npx expo start
 
 ```typescript
 // Screens: PascalCase with "Screen" suffix
-LoginScreen.tsx
-ProfileScreen.tsx
+LoginScreen.tsx;
+ProfileScreen.tsx;
 
 // Components: PascalCase
-Button.tsx
-Header.tsx
+Button.tsx;
+Header.tsx;
 
 // Hooks: camelCase with "use" prefix
-use-auth.ts
-use-profile.ts
+use - auth.ts;
+use - profile.ts;
 
 // API: kebab-case with "-api" suffix
-auth-api.ts
-profile-api.ts
+auth - api.ts;
+profile - api.ts;
 
 // Types: kebab-case with ".types" suffix
-auth.types.ts
-profile.types.ts
+auth.types.ts;
+profile.types.ts;
 ```
 
 ### 2. Import Organization
 
 ```typescript
 // 1. React and React Native
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, TouchableOpacity } from "react-native";
 
 // 2. Third-party libraries
-import { router } from 'expo-router';
-import { useQuery } from '@tanstack/react-query';
+import { router } from "expo-router";
+import { useQuery } from "@tanstack/react-query";
 
 // 3. Shared components
-import { Button } from '@/shared/components/ui';
-import { Header } from '@/shared/components/layout';
+import { Button } from "@/shared/components/ui";
+import { Header } from "@/shared/components/layout";
 
 // 4. Feature-specific imports
-import { useAuth } from '../hooks/use-auth';
-import { authApi } from '../api/auth-api';
+import { useAuth } from "../hooks/use-auth";
+import { authApi } from "../api/auth-api";
 
 // 5. Types
-import type { User } from '../types/auth.types';
+import type { User } from "../types/auth.types";
 ```
 
 ### 3. Component Size
@@ -1234,10 +1237,10 @@ export function useLogin() {
   return useMutation({
     mutationFn: authApi.login,
     onSuccess: (data) => {
-      toast.success('Login successful');
+      toast.success("Login successful");
     },
     onError: (error: any) => {
-      toast.error(error.message || 'Login failed');
+      toast.error(error.message || "Login failed");
     },
   });
 }
@@ -1245,10 +1248,10 @@ export function useLogin() {
 // In screens
 const handleLogin = () => {
   if (!email || !password) {
-    toast.error('Please fill all fields');
+    toast.error("Please fill all fields");
     return;
   }
-  
+
   login.mutate({ email, password });
 };
 ```
@@ -1277,11 +1280,11 @@ if (error) {
 // Extract reusable logic to hooks
 export function useFormValidation() {
   const [errors, setErrors] = useState({});
-  
+
   const validate = (data: any) => {
     // Validation logic
   };
-  
+
   return { errors, validate };
 }
 
