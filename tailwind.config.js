@@ -71,6 +71,10 @@ module.exports = {
       borderWidth: {
         hairline: hairlineWidth(),
       },
+      fontFamily: {
+        sans: ["Circular-Medium"],
+        circular: ["Circular-Medium"],
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
