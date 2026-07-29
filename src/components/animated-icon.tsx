@@ -37,7 +37,7 @@ export function AnimatedSplashOverlay() {
     <Image
       style={styles.splashImage}
       contentFit="cover"
-      source={require('@/assets/images/splash-assets/index.png')}
+      source={require('@/assets/images/splash-assets/splashscreen_logo.png')}
     />
   );
 
