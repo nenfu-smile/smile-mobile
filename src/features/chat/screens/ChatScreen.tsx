@@ -1,0 +1,123 @@
+import { useLocalSearchParams } from "expo-router";
+import { useState } from "react";
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Calling, Send, Video } from "react-native-iconly";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import { MOCK_CHATS } from "@/features/chat/data/mock-chats";
+import { MOCK_MESSAGES, type ChatMessage } from "@/features/chat/data/mock-messages";
+import { cn } from "@/lib/utils";
+import { BackButton } from "@/shared/components/ui/back-button";
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+export function ChatScreen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const chat = MOCK_CHATS.find((item) => item.id === id) ?? MOCK_CHATS[0];
+  const [messages, setMessages] = useState<ChatMessage[]>(MOCK_MESSAGES);
+  const [draft, setDraft] = useState("");
+
+  const handleSend = () => {
+    if (!draft.trim()) return;
+    setMessages((current) => [
+      ...current,
+      { id: `local-${current.length}`, text: draft.trim(), fromMe: true, timestamp: "Now" },
+    ]);
+    setDraft("");
+  };
+
+  return (
+    <SafeAreaView edges={["top"]} className="flex-1 bg-white">
+      <View className="flex-row items-center gap-3 border-b border-neutral-100 px-4 pb-3 pt-2">
+        <BackButton />
+
+        <View className="flex-1">
+          <Text className="text-lg font-bold text-neutral-900">{chat.name}</Text>
+          <Text className="text-sm text-neutral-400">Typing...</Text>
+        </View>
+
+        <Pressable className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100">
+          <Calling set="bold" primaryColor="#111827" size={18} />
+        </Pressable>
+        <Pressable className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100">
+          <Video set="bold" primaryColor="#111827" size={18} />
+        </Pressable>
+
+        <View
+          className="h-11 w-11 items-center justify-center rounded-full border-2 border-primary"
+          style={{ backgroundColor: chat.avatarColor }}>
+          <Text className="text-xs font-semibold text-white">{initials(chat.name)}</Text>
+        </View>
+      </View>
+
+      <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingVertical: 16 }}>
+        {messages.map((message) => (
+          <View key={message.id}>
+            {message.dateLabel ? (
+              <View className="my-4 flex-row items-center gap-3">
+                <View className="h-px flex-1 bg-primary/40" />
+                <Text className="text-sm text-neutral-500">{message.dateLabel}</Text>
+                <View className="h-px flex-1 bg-primary/40" />
+              </View>
+            ) : null}
+
+            <View
+              className={cn(
+                "mb-1 max-w-[80%] flex-row items-start gap-2",
+                message.fromMe ? "ml-auto flex-row-reverse" : "",
+              )}>
+              <View
+                className="h-8 w-8 items-center justify-center rounded-full"
+                style={{ backgroundColor: chat.avatarColor }}>
+                <Text className="text-[10px] font-semibold text-white">
+                  {message.fromMe ? "Me" : initials(chat.name)}
+                </Text>
+              </View>
+
+              <View
+                className={cn(
+                  "rounded-2xl px-4 py-3",
+                  message.fromMe ? "bg-primary" : "bg-neutral-100",
+                )}>
+                <Text className={message.fromMe ? "text-white" : "text-neutral-900"}>
+                  {message.text}
+                </Text>
+              </View>
+            </View>
+
+            <Text
+              className={cn(
+                "mb-4 text-xs text-neutral-400",
+                message.fromMe ? "mr-10 text-right" : "ml-10",
+              )}>
+              {message.timestamp}
+              {message.fromMe ? " ✓✓" : ""}
+            </Text>
+          </View>
+        ))}
+      </ScrollView>
+
+      <View className="flex-row items-center gap-3 border-t border-neutral-100 px-4 py-3">
+        <TextInput
+          value={draft}
+          onChangeText={setDraft}
+          placeholder="Write your message"
+          placeholderTextColor="#9CA3AF"
+          className="flex-1 rounded-full border border-neutral-200 px-5 py-3 text-base text-neutral-900"
+        />
+        <Pressable
+          onPress={handleSend}
+          className="h-12 w-12 items-center justify-center rounded-full bg-primary active:opacity-80">
+          <Send set="bold" primaryColor="white" size={18} />
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  );
+}
