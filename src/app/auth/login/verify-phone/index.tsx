@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { LoginVerifyPhoneScreen } from "@/features/auth/screens";
 
-export default function index() {
-  return (
-    <View>
-      <Text>index</Text>
-    </View>
-  );
+export default function LoginVerifyPhone() {
+  return <LoginVerifyPhoneScreen />;
 }
