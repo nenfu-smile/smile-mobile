@@ -1,8 +1,8 @@
 import { BlurView } from "expo-blur";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { ArrowRight } from "lucide-react-native";
 import { cssInterop } from "nativewind";
+import { ArrowRight } from "react-native-iconly";
 import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -41,7 +41,7 @@ export function OnboardingScreen() {
           className="mt-2 flex-row items-center justify-between rounded-full bg-white p-2 pl-8 active:opacity-80">
           <Text className="text-base font-semibold text-neutral-900">Get started</Text>
           <View className="h-12 w-12 items-center justify-center rounded-full bg-primary">
-            <ArrowRight color="white" size={20} />
+            <ArrowRight set="bold" primaryColor="white" size={20} />
           </View>
         </Pressable>
       </BlurView>
