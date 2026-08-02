@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { FeedScreen } from "@/features/feed/screens";
 
-export default function Reels() {
-  return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-lg font-semibold text-neutral-400">Reels — coming soon</Text>
-    </View>
-  );
+export default function Feed() {
+  return <FeedScreen />;
 }
