@@ -2,9 +2,10 @@ import { BlurView } from "expo-blur";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { cssInterop } from "nativewind";
-import { ArrowRight } from "react-native-iconly";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import { PillArrowButton } from "@/shared/components/ui/pill-arrow-button";
 
 cssInterop(BlurView, { className: "style" });
 
@@ -36,14 +37,7 @@ export function OnboardingScreen() {
           workmate, that close neighbor — Smile is here to get you to that person with one tap.
         </Text>
 
-        <Pressable
-          onPress={() => router.push("/auth")}
-          className="mt-2 flex-row items-center justify-between rounded-full bg-white p-2 pl-8 active:opacity-80">
-          <Text className="text-base font-semibold text-neutral-900">Get started</Text>
-          <View className="h-12 w-12 items-center justify-center rounded-full bg-primary">
-            <ArrowRight set="bold" primaryColor="white" size={20} />
-          </View>
-        </Pressable>
+        <PillArrowButton label="Get started" onPress={() => router.push("/auth")} className="mt-2" />
       </BlurView>
     </View>
   );
