@@ -8,3 +8,8 @@ export { InterestsScreen } from "./InterestsScreen";
 export { PhotoPickerScreen } from "./PhotoPickerScreen";
 export { LoginScreen } from "./LoginScreen";
 export { LoginVerifyPhoneScreen } from "./LoginVerifyPhoneScreen";
+export { RecoverEmailScreen } from "./RecoverEmailScreen";
+export { RecoverVerifyEmailScreen } from "./RecoverVerifyEmailScreen";
+export { RecoverPhoneScreen } from "./RecoverPhoneScreen";
+export { RecoverVerifyPhoneScreen } from "./RecoverVerifyPhoneScreen";
+export { RecoverSuccessScreen } from "./RecoverSuccessScreen";
