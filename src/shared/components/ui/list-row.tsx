@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 interface ListRowProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   distance?: string;
   avatarColor: string;
   badge?: boolean;
@@ -50,7 +50,7 @@ export function ListRow({
 
       <View className="flex-1 gap-0.5">
         <Text className="text-base font-semibold text-neutral-900">{title}</Text>
-        <Text className="text-sm text-neutral-500">{subtitle}</Text>
+        {subtitle ? <Text className="text-sm text-neutral-500">{subtitle}</Text> : null}
         {distance ? (
           <View className="mt-0.5 flex-row items-center gap-1">
             <Location set="bold" primaryColor="#9CA3AF" size={12} />
