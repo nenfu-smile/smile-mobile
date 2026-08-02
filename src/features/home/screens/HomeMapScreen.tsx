@@ -21,7 +21,7 @@ export function HomeMapScreen() {
           <Search set="bold" primaryColor="#9CA3AF" size={18} />
           <Text className="text-base text-neutral-400">Search for people/events</Text>
         </Pressable>
-        <IconCircleButton showBadge>
+        <IconCircleButton showBadge onPress={() => router.push("/notifications")}>
           <Notification set="bold" primaryColor="#111827" size={20} />
         </IconCircleButton>
       </SafeAreaView>
