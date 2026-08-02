@@ -33,7 +33,10 @@ export function LoginScreen() {
         />
 
         <Text className="text-neutral-900">
-          Lost phone Number? <Text className="font-bold">Recover</Text>
+          Lost phone Number?{" "}
+          <Text className="font-bold" onPress={() => router.push("/auth/recover")}>
+            Recover
+          </Text>
         </Text>
 
         <PrimaryButton
