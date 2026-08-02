@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 import { Location, Upload } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -67,8 +68,12 @@ export function ProfileDetailScreen({ isSelf }: ProfileDetailScreenProps) {
 
         {!isSelf ? (
           <>
-            <PrimaryButton label="Chat Up" onPress={() => {}} />
-            <Text className="mb-6 mt-4 text-center font-semibold text-red-500">Report User</Text>
+            <PrimaryButton label="Chat Up" onPress={() => router.push(`/chat/${profile.id}`)} />
+            <Text
+              className="mb-6 mt-4 text-center font-semibold text-red-500"
+              onPress={() => router.push({ pathname: "/report", params: { kind: "user" } })}>
+              Report User
+            </Text>
           </>
         ) : null}
       </ScrollView>
