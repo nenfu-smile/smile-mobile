@@ -2,9 +2,10 @@ import { Pressable, View, type PressableProps } from "react-native";
 
 import { cn } from "@/lib/utils";
 
-interface IconCircleButtonProps extends PressableProps {
+interface IconCircleButtonProps extends Omit<PressableProps, "children"> {
   className?: string;
   showBadge?: boolean;
+  children?: React.ReactNode;
 }
 
 export function IconCircleButton({
