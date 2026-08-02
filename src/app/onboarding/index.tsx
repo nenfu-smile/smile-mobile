@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { OnboardingScreen } from "@/features/onboarding/screens";
 
-export default function index() {
-  return (
-    <View>
-      <Text>index</Text>
-    </View>
-  );
+export default function Onboarding() {
+  return <OnboardingScreen />;
 }
