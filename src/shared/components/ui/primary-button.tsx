@@ -1,5 +1,5 @@
 import { ActivityIndicator, Pressable, Text, type PressableProps } from "react-native";
-import { ArrowRight } from "react-native-iconly";
+import { ArrowRight, TickSquare } from "react-native-iconly";
 
 import { cn } from "@/lib/utils";
 
@@ -7,6 +7,7 @@ interface PrimaryButtonProps extends Omit<PressableProps, "children"> {
   label: string;
   loading?: boolean;
   className?: string;
+  icon?: "arrow" | "check";
 }
 
 export function PrimaryButton({
@@ -14,6 +15,7 @@ export function PrimaryButton({
   loading,
   disabled,
   className,
+  icon = "arrow",
   ...props
 }: PrimaryButtonProps) {
   return (
@@ -31,7 +33,11 @@ export function PrimaryButton({
       ) : (
         <>
           <Text className="text-base font-semibold text-white">{label}</Text>
-          <ArrowRight set="bold" primaryColor="white" size={18} />
+          {icon === "check" ? (
+            <TickSquare set="bold" primaryColor="white" size={18} />
+          ) : (
+            <ArrowRight set="bold" primaryColor="white" size={18} />
+          )}
         </>
       )}
     </Pressable>
