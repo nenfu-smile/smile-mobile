@@ -1,5 +1,5 @@
-import { HomeMapScreen } from "@/features/home/screens/HomeMapScreen";
+import { Redirect } from "expo-router";
 
-export default function Home() {
-  return <HomeMapScreen />;
+export default function index() {
+  return <Redirect href="/auth" />;
 }

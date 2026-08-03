@@ -7,7 +7,6 @@ import { Toaster } from "sonner-native";
 import "../global.css";
 
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
-import AppTabs from "@/shared/components/layout/app-tabs";
 import { DEFAULT_FONT_FAMILY } from "@/shared/config/default-font";
 
 SplashScreen.preventAutoHideAsync();
@@ -24,7 +23,7 @@ export default function TabLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <PortalHost />
       <AnimatedSplashOverlay />
-      <AppTabs />
+      {/* <AppTabs /> */}
       <Toaster />
     </ThemeProvider>
   );
