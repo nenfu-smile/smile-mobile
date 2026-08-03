@@ -1,8 +1,13 @@
 import { Tabs, TabList, TabSlot, TabTrigger, type TabTriggerSlotProps } from "expo-router/ui";
+import { useState } from "react";
 import { Pressable } from "react-native";
-import { Chat, Location, Play, Plus, User } from "react-native-iconly";
+import { Chat, CloseSquare, Location, Play, Plus, User } from "react-native-iconly";
+
+import { CreateMenuSheet } from "@/shared/components/layout/create-menu-sheet";
 
 export default function AppTabs() {
+  const [createMenuVisible, setCreateMenuVisible] = useState(false);
+
   return (
     <Tabs>
       <TabSlot />
@@ -14,9 +19,17 @@ export default function AppTabs() {
           <TabTrigger name="explore" href="/explore" asChild>
             <TabIcon Icon={Play} />
           </TabTrigger>
-          <TabTrigger name="create" href="/create" asChild>
-            <CreateTabIcon />
-          </TabTrigger>
+
+          <Pressable
+            onPress={() => setCreateMenuVisible((visible) => !visible)}
+            className="-translate-y-4 h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/40">
+            {createMenuVisible ? (
+              <CloseSquare set="bold" primaryColor="white" size={24} />
+            ) : (
+              <Plus set="bold" primaryColor="white" size={26} />
+            )}
+          </Pressable>
+
           <TabTrigger name="chat" href="/chat" asChild>
             <TabIcon Icon={Chat} />
           </TabTrigger>
@@ -25,30 +38,18 @@ export default function AppTabs() {
           </TabTrigger>
         </Pressable>
       </TabList>
+
+      <CreateMenuSheet visible={createMenuVisible} onClose={() => setCreateMenuVisible(false)} />
     </Tabs>
   );
 }
 
 type IconComponent = typeof Location;
 
-function TabIcon({
-  Icon,
-  isFocused,
-  ...props
-}: TabTriggerSlotProps & { Icon: IconComponent }) {
+function TabIcon({ Icon, isFocused, ...props }: TabTriggerSlotProps & { Icon: IconComponent }) {
   return (
     <Pressable {...props} className="items-center justify-center p-2">
       <Icon set="bold" primaryColor={isFocused ? "#FF660A" : "#9CA3AF"} size={24} />
-    </Pressable>
-  );
-}
-
-function CreateTabIcon({ isFocused: _isFocused, ...props }: TabTriggerSlotProps) {
-  return (
-    <Pressable
-      {...props}
-      className="-translate-y-4 h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/40">
-      <Plus set="bold" primaryColor="white" size={26} />
     </Pressable>
   );
 }
