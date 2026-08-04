@@ -21,6 +21,7 @@ export function FeedScreen() {
   const [filterVisible, setFilterVisible] = useState(false);
   const [commentsPostId, setCommentsPostId] = useState<string | null>(null);
   const [optionsPost, setOptionsPost] = useState<FeedPost | null>(null);
+  const [posts, setPosts] = useState(MOCK_POSTS);
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-white">
@@ -42,7 +43,7 @@ export function FeedScreen() {
           </Pressable>
         </View>
 
-        {MOCK_POSTS.map((post) => (
+        {posts.map((post) => (
           <View key={post.id} className="mt-6">
             <View className="flex-row items-center gap-3">
               <View
@@ -96,7 +97,9 @@ export function FeedScreen() {
       <PostOptionsSheet
         visible={optionsPost != null}
         authorName={optionsPost?.authorName ?? "this user"}
+        isOwn={optionsPost?.isOwn}
         onClose={() => setOptionsPost(null)}
+        onDelete={() => setPosts((current) => current.filter((post) => post.id !== optionsPost?.id))}
       />
       <FilterSheet visible={filterVisible} onClose={() => setFilterVisible(false)} onApply={() => {}} />
     </SafeAreaView>
