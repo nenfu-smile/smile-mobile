@@ -27,10 +27,10 @@ export function OnboardingScreen() {
       </SafeAreaView>
 
       <BlurView
-        intensity={40}
+        intensity={70}
         tint="light"
         blurMethod="dimezisBlurView"
-        className="absolute inset-x-0 bg-white/60 bottom-0 gap-4 rounded-t-[40px] px-6 pb-12 pt-8 overflow-hidden"
+        className="absolute inset-x-0 bg-white/40 bottom-0 gap-4 rounded-t-[40px] px-6 pb-12 pt-8 overflow-hidden"
       >
         <Text className="text-center text-2xl font-bold text-neutral-900">
           Smile your way to Connect!
