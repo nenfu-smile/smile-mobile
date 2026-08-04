@@ -16,7 +16,15 @@ export function PhoneOtpCard({ phoneLabel, onVerified }: PhoneOtpCardProps) {
     <AuthStepLayout
       title="Let's verify your Phone Number"
       description={`Enter the code we sent to ${phoneLabel}`}
-      footer={<PrimaryButton label="Continue" disabled={code.length < 5} onPress={onVerified} />}>
+      image={require("@/assets/images/verify-number.png")}
+      footer={
+        <PrimaryButton
+          label="Continue"
+          disabled={code.length < 5}
+          onPress={onVerified}
+        />
+      }
+    >
       <OtpInput value={code} onChange={setCode} />
     </AuthStepLayout>
   );

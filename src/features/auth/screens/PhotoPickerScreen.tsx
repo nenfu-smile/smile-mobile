@@ -10,10 +10,15 @@ export function PhotoPickerScreen() {
     <AuthStepLayout
       title="Pick a Photo"
       description="Quality photo helps to create a sense of trust and connection, allowing potential matches to get a better sense of who you are."
-      footer={<PrimaryButton label="Next" onPress={() => router.replace("/")} />}>
+      image={require("@/assets/images/photo_interest.png")}
+      footer={
+        <PrimaryButton label="Next" onPress={() => router.replace("/")} />
+      }
+    >
       <Pressable
         // TODO: wire up expo-image-picker to actually select/capture a photo
-        className="h-40 w-40 items-center justify-center self-center rounded-full border-2 border-primary bg-primary/10 active:opacity-80">
+        className="h-40 w-40 items-center justify-center self-center rounded-full border-2 border-primary bg-primary/10 active:opacity-80"
+      >
         <Camera color="#171717" size={28} />
       </Pressable>
     </AuthStepLayout>

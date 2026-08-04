@@ -4,6 +4,7 @@ import { Modal, Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { ALL_COUNTRIES, type Country } from "@/features/auth/data/countries";
+import { BackButton } from "@/shared/components/ui/back-button";
 
 interface CountryPickerSheetProps {
   visible: boolean;
@@ -21,21 +22,22 @@ export function CountryPickerSheet({ visible, onClose, onSelect }: CountryPicker
   }, [query]);
 
   return (
-    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
-      <Pressable className="flex-1 bg-black/40" onPress={onClose} />
-
-      <SafeAreaView edges={["bottom"]} className="max-h-[80%] rounded-t-[28px] bg-white px-5 pt-3">
-        <View className="mb-3 h-1 w-10 self-center rounded-full bg-neutral-200" />
-
-        <TextInput
-          value={query}
-          onChangeText={setQuery}
-          placeholder="Search"
-          placeholderTextColor="#9CA3AF"
-          className="mb-3 rounded-full border border-neutral-200 px-5 py-3 text-base text-neutral-900"
-        />
+    <Modal visible={visible} animationType="slide" onRequestClose={onClose}>
+      <SafeAreaView edges={["top"]} className="flex-1 bg-white px-5">
+        <View className="flex-row items-center gap-3 pt-2">
+          <BackButton onPress={onClose} />
+          <TextInput
+            value={query}
+            onChangeText={setQuery}
+            autoFocus
+            placeholder="Search"
+            placeholderTextColor="#9CA3AF"
+            className="flex-1 rounded-full border border-neutral-200 px-5 py-3 text-base text-neutral-900"
+          />
+        </View>
 
         <FlashList
+          className="mt-4"
           data={results}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (

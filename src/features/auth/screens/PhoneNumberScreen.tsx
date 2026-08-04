@@ -9,7 +9,9 @@ import { PrimaryButton } from "@/shared/components/ui/primary-button";
 
 export function PhoneNumberScreen() {
   const countryDialCode = useSignupStore((state) => state.countryDialCode);
-  const setCountryDialCode = useSignupStore((state) => state.setCountryDialCode);
+  const setCountryDialCode = useSignupStore(
+    (state) => state.setCountryDialCode,
+  );
   const phoneNumber = useSignupStore((state) => state.phoneNumber);
   const setPhoneNumber = useSignupStore((state) => state.setPhoneNumber);
   const [pickerVisible, setPickerVisible] = useState(false);
@@ -18,13 +20,15 @@ export function PhoneNumberScreen() {
     <AuthStepLayout
       title="Can we have your number?"
       description="We'll send you a verification code to keep your account secure."
+      image={require("@/assets/images/add-phone-number.png")}
       footer={
         <PrimaryButton
           label="Continue"
           disabled={phoneNumber.trim().length < 6}
           onPress={() => router.push("/auth/signup/verify-phone")}
         />
-      }>
+      }
+    >
       <View className="flex-row items-center gap-2 rounded-full bg-white px-5 py-4">
         <Pressable onPress={() => setPickerVisible(true)}>
           <Text className="text-base text-neutral-900">{countryDialCode}</Text>

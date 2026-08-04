@@ -12,6 +12,7 @@ export function FullNameScreen() {
   return (
     <AuthStepLayout
       title="What is your Full Name?"
+      image={require("@/assets/images/your_name.png")}
       description="A name adds to your identification. Let the Smile community know how best to address you."
       footer={
         <PrimaryButton
@@ -19,7 +20,8 @@ export function FullNameScreen() {
           disabled={fullName.trim().length === 0}
           onPress={() => router.push("/auth/signup/phone")}
         />
-      }>
+      }
+    >
       <TextInput
         value={fullName}
         onChangeText={setFullName}
