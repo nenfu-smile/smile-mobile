@@ -1,5 +1,5 @@
+import { SquareX } from "lucide-react-native";
 import { Modal, Pressable, Text, View } from "react-native";
-import { CloseSquare } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ConfirmDeleteModalProps {
@@ -23,7 +23,7 @@ export function ConfirmDeleteModal({
 
       <SafeAreaView edges={["bottom"]} className="items-center gap-2 rounded-t-[28px] bg-white px-6 pb-6 pt-8">
         <View className="h-16 w-16 items-center justify-center rounded-full bg-red-500">
-          <CloseSquare set="bold" primaryColor="white" size={28} />
+          <SquareX color="white" size={28} />
         </View>
 
         <Text className="mt-2 text-2xl font-bold text-neutral-900">{title}</Text>

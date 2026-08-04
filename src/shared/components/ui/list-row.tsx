@@ -1,4 +1,4 @@
-import { Location } from "react-native-iconly";
+import { MapPin } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 
 import { cn } from "@/lib/utils";
@@ -53,7 +53,7 @@ export function ListRow({
         {subtitle ? <Text className="text-sm text-neutral-500">{subtitle}</Text> : null}
         {distance ? (
           <View className="mt-0.5 flex-row items-center gap-1">
-            <Location set="bold" primaryColor="#9CA3AF" size={12} />
+            <MapPin color="#9CA3AF" size={12} />
             <Text className="text-sm text-neutral-500">{distance}</Text>
           </View>
         ) : null}

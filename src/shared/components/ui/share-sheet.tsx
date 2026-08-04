@@ -1,5 +1,5 @@
+import { Camera, CircleEllipsis, MessageCircle, Send, SquareX } from "lucide-react-native";
 import { Modal, Pressable, Text, View } from "react-native";
-import { Camera, Chat, CloseSquare, MoreCircle, Send } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface ShareSheetProps {
@@ -9,13 +9,13 @@ interface ShareSheetProps {
 
 const SHARE_OPTIONS = [
   { label: "Copy url", color: "#374151", Icon: Send },
-  { label: "WhatsApp", color: "#22C55E", Icon: Chat },
+  { label: "WhatsApp", color: "#22C55E", Icon: MessageCircle },
   { label: "Direct", color: "#DB2777", Icon: Camera },
   { label: "Telegram", color: "#0EA5E9", Icon: Send },
-  { label: "Messenger", color: "#7C3AED", Icon: Chat },
-  { label: "Twitter", color: "#38BDF8", Icon: Chat },
-  { label: "Messages", color: "#16A34A", Icon: Chat },
-  { label: "More", color: "#111827", Icon: MoreCircle },
+  { label: "Messenger", color: "#7C3AED", Icon: MessageCircle },
+  { label: "Twitter", color: "#38BDF8", Icon: MessageCircle },
+  { label: "Messages", color: "#16A34A", Icon: MessageCircle },
+  { label: "More", color: "#111827", Icon: CircleEllipsis },
 ];
 
 export function ShareSheet({ visible, onClose }: ShareSheetProps) {
@@ -29,7 +29,7 @@ export function ShareSheet({ visible, onClose }: ShareSheetProps) {
           <Pressable
             onPress={onClose}
             className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100">
-            <CloseSquare set="bold" primaryColor="#6B7280" size={18} />
+            <SquareX color="#6B7280" size={18} />
           </Pressable>
         </View>
 
@@ -43,7 +43,7 @@ export function ShareSheet({ visible, onClose }: ShareSheetProps) {
               <View
                 className="h-16 w-16 items-center justify-center rounded-full"
                 style={{ backgroundColor: color }}>
-                <Icon set="bold" primaryColor="white" size={24} />
+                <Icon color="white" size={24} />
               </View>
               <Text className="text-xs text-neutral-700">{label}</Text>
             </Pressable>

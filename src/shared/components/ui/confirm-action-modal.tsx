@@ -1,5 +1,5 @@
+import { ArrowLeft, ArrowRight } from "lucide-react-native";
 import { Modal, Pressable, Text, View } from "react-native";
-import { ArrowLeft, ArrowRight } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { cn } from "@/lib/utils";
@@ -41,7 +41,7 @@ export function ConfirmActionModal({
           <Pressable
             onPress={onCancel}
             className="flex-1 flex-row items-center justify-center gap-2 rounded-full border border-neutral-200 py-4 active:opacity-70">
-            <ArrowLeft set="bold" primaryColor="#111827" size={16} />
+            <ArrowLeft color="#111827" size={16} />
             <Text className="text-base font-semibold text-neutral-900">{cancelLabel}</Text>
           </Pressable>
           <Pressable
@@ -51,7 +51,7 @@ export function ConfirmActionModal({
               destructive ? "bg-red-500" : "bg-primary",
             )}>
             <Text className="text-base font-semibold text-white">{confirmLabel}</Text>
-            <ArrowRight set="bold" primaryColor="white" size={16} />
+            <ArrowRight color="white" size={16} />
           </Pressable>
         </View>
       </SafeAreaView>

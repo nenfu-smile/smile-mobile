@@ -1,6 +1,6 @@
 import { router } from "expo-router";
+import { ChevronLeft } from "lucide-react-native";
 import { Pressable, type PressableProps } from "react-native";
-import { ChevronLeft } from "react-native-iconly";
 
 import { cn } from "@/lib/utils";
 
@@ -17,7 +17,7 @@ export function BackButton({ className, onPress, ...props }: BackButtonProps) {
         className,
       )}
       {...props}>
-      <ChevronLeft set="bold" primaryColor="#171717" size={20} />
+      <ChevronLeft color="#171717" size={20} />
     </Pressable>
   );
 }

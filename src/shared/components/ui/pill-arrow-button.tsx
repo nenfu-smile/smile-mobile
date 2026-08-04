@@ -1,5 +1,5 @@
+import { ArrowRight } from "lucide-react-native";
 import { Pressable, Text, View, type PressableProps } from "react-native";
-import { ArrowRight } from "react-native-iconly";
 
 import { cn } from "@/lib/utils";
 
@@ -18,7 +18,7 @@ export function PillArrowButton({ label, className, ...props }: PillArrowButtonP
       {...props}>
       <Text className="text-base font-semibold text-neutral-900">{label}</Text>
       <View className="h-12 w-12 items-center justify-center rounded-full bg-primary">
-        <ArrowRight set="bold" primaryColor="white" size={20} />
+        <ArrowRight color="white" size={20} />
       </View>
     </Pressable>
   );

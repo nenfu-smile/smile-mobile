@@ -1,5 +1,5 @@
+import { ArrowRight, SquareCheck } from "lucide-react-native";
 import { ActivityIndicator, Pressable, Text, type PressableProps } from "react-native";
-import { ArrowRight, TickSquare } from "react-native-iconly";
 
 import { cn } from "@/lib/utils";
 
@@ -34,9 +34,9 @@ export function PrimaryButton({
         <>
           <Text className="text-base font-semibold text-white">{label}</Text>
           {icon === "check" ? (
-            <TickSquare set="bold" primaryColor="white" size={18} />
+            <SquareCheck color="white" size={18} />
           ) : (
-            <ArrowRight set="bold" primaryColor="white" size={18} />
+            <ArrowRight color="white" size={18} />
           )}
         </>
       )}
