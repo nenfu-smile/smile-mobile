@@ -1,12 +1,11 @@
 import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
-import { DarkTheme, DefaultTheme, ThemeProvider } from "expo-router";
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useColorScheme } from "react-native";
-import { Toaster } from "sonner-native";
+//import { Toaster } from "sonner-native";
 import "../global.css";
 
-import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import { DEFAULT_FONT_FAMILY } from "@/shared/config/default-font";
 
 SplashScreen.preventAutoHideAsync();
@@ -22,9 +21,10 @@ export default function TabLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <PortalHost />
-      <AnimatedSplashOverlay />
+      <Stack />
+      {/* <AnimatedSplashOverlay /> */}
       {/* <AppTabs /> */}
-      <Toaster />
+      {/* <Toaster /> */}
     </ThemeProvider>
   );
 }
