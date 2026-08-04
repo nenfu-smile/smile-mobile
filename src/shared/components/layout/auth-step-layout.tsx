@@ -43,30 +43,36 @@ export function AuthStepLayout({
         <BackButton />
       </SafeAreaView>
 
-      <BlurView
-        intensity={40}
-        tint="light"
-        blurMethod="dimezisBlurViewSdk31Plus"
-        className="absolute inset-x-0 bottom-0 gap-6 rounded-t-[40px] px-6 pb-12 pt-10 overflow-hidden"
+      <View
+        className="absolute inset-x-0 bottom-0 overflow-hidden rounded-t-[40px]"
         style={{ minHeight: `${cardMinHeight}%` }}
       >
-        {icon}
+        <BlurView
+          intensity={40}
+          tint="light"
+          blurMethod="dimezisBlurViewSdk31Plus"
+          className="absolute inset-0"
+        />
 
-        <View className="gap-3">
-          <Text className="text-center text-2xl font-bold text-neutral-900">
-            {title}
-          </Text>
-          {description ? (
-            <Text className="text-center text-base text-neutral-600">
-              {description}
+        <View className="gap-6 px-6 pb-12 pt-10">
+          {icon}
+
+          <View className="gap-3">
+            <Text className="text-center text-2xl font-bold text-neutral-900">
+              {title}
             </Text>
-          ) : null}
+            {description ? (
+              <Text className="text-center text-base text-neutral-600">
+                {description}
+              </Text>
+            ) : null}
+          </View>
+
+          {children}
+
+          {footer}
         </View>
-
-        {children}
-
-        {footer}
-      </BlurView>
+      </View>
     </View>
   );
 }
