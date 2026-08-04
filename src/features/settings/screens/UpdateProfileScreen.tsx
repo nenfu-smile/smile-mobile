@@ -1,6 +1,6 @@
+import { Camera } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Camera } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { EditBioSheet } from "@/features/settings/components/EditBioSheet";
@@ -36,7 +36,7 @@ export function UpdateProfileScreen() {
           <BackButton />
           <Text className="text-2xl font-bold text-white">Update Profile</Text>
           <Pressable className="h-11 w-11 items-center justify-center rounded-full bg-white">
-            <Camera set="bold" primaryColor="#111827" size={18} />
+            <Camera color="#111827" size={18} />
           </Pressable>
         </SafeAreaView>
       </View>
@@ -49,7 +49,7 @@ export function UpdateProfileScreen() {
             <Text className="text-2xl font-bold text-white">{initials(name)}</Text>
           </View>
           <Pressable className="absolute bottom-0 right-0 h-8 w-8 items-center justify-center rounded-full bg-primary border-2 border-white">
-            <Camera set="bold" primaryColor="white" size={14} />
+            <Camera color="white" size={14} />
           </Pressable>
         </View>
       </View>
@@ -85,7 +85,7 @@ export function UpdateProfileScreen() {
               <View
                 key={label}
                 className="flex-row items-center gap-2 rounded-full bg-neutral-900 px-5 py-3">
-                {Icon ? <Icon set="bold" primaryColor="white" size={18} /> : null}
+                {Icon ? <Icon color="white" size={18} /> : null}
                 <Text className="text-base font-medium text-white">{label}</Text>
               </View>
             );

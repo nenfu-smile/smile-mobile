@@ -1,6 +1,6 @@
 import { router } from "expo-router";
+import { MapPin, Settings, Star, Upload, Users } from "lucide-react-native";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Location, People, Setting, Star, Upload } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_OWN_POSTS, MOCK_PROFILE, MOCK_SELF_PROFILE } from "@/features/people/data/mock-people";
@@ -45,7 +45,7 @@ function SelfProfileView() {
             <Text className="text-2xl font-bold text-white">{initials(profile.name)}</Text>
           </View>
           <View className="absolute -right-1 -top-1 h-6 w-6 items-center justify-center rounded-full bg-red-500">
-            <Star set="bold" primaryColor="white" size={12} />
+            <Star color="white" size={12} />
           </View>
         </View>
 
@@ -53,9 +53,9 @@ function SelfProfileView() {
         <Text className="text-base text-neutral-500">{profile.distance}</Text>
 
         <View className="mt-5 flex-row gap-10">
-          <IconAction label="Connections" Icon={People} onPress={() => router.push("/connections")} />
+          <IconAction label="Connections" Icon={Users} onPress={() => router.push("/connections")} />
           <IconAction label="Saved" Icon={Star} onPress={() => router.push("/saved-posts")} />
-          <IconAction label="Settings" Icon={Setting} onPress={() => router.push("/settings")} />
+          <IconAction label="Settings" Icon={Settings} onPress={() => router.push("/settings")} />
         </View>
       </View>
 
@@ -67,7 +67,7 @@ function SelfProfileView() {
           <Text className="text-neutral-900">{profile.postCount} Post</Text>
           <Pressable onPress={() => router.push("/posts-map")}>
             <View className="flex-row items-center gap-1">
-              <Location set="bold" primaryColor="#111827" size={16} />
+              <MapPin color="#111827" size={16} />
               <Text className="font-semibold text-neutral-900">View on Map</Text>
             </View>
           </Pressable>
@@ -93,13 +93,13 @@ function IconAction({
   onPress,
 }: {
   label: string;
-  Icon: typeof People;
+  Icon: typeof Users;
   onPress: () => void;
 }) {
   return (
     <View className="items-center gap-2">
       <IconCircleButton onPress={onPress} className="bg-primary/10">
-        <Icon set="bold" primaryColor="#FF660A" size={20} />
+        <Icon color="#FF660A" size={20} />
       </IconCircleButton>
       <Text className="text-sm font-medium text-neutral-900">{label}</Text>
     </View>
@@ -114,7 +114,7 @@ function OtherProfileView() {
       <SafeAreaView edges={["top"]} className="flex-row items-center justify-between px-4 pt-2">
         <BackButton />
         <IconCircleButton>
-          <Upload set="bold" primaryColor="#111827" size={18} />
+          <Upload color="#111827" size={18} />
         </IconCircleButton>
       </SafeAreaView>
 
@@ -135,7 +135,7 @@ function OtherProfileView() {
         </View>
 
         <View className="mt-2 flex-row items-center gap-1">
-          <Location set="bold" primaryColor="#9CA3AF" size={14} />
+          <MapPin color="#9CA3AF" size={14} />
           <Text className="text-neutral-500">{profile.address}</Text>
         </View>
         <Text className="mt-1 text-neutral-500">{profile.distance}</Text>

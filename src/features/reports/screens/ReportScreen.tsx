@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
+import { SquareCheck } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { TickSquare } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { cn } from "@/lib/utils";
@@ -32,7 +32,7 @@ export function ReportScreen() {
     <SafeAreaView edges={["top"]} className="flex-1 bg-white">
       {submitted ? (
         <View className="flex-row items-center gap-2 border-b border-primary bg-primary/10 px-6 py-4">
-          <TickSquare set="bold" primaryColor="#FF660A" size={20} />
+          <SquareCheck color="#FF660A" size={20} />
           <Text className="text-base font-medium text-neutral-900">
             Your report has been submitted
           </Text>

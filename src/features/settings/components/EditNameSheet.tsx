@@ -1,6 +1,6 @@
+import { SquareCheck } from "lucide-react-native";
 import { useState } from "react";
 import { Modal, Pressable, Text, TextInput, View } from "react-native";
-import { TickSquare } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { PrimaryButton } from "@/shared/components/ui/primary-button";
@@ -41,7 +41,7 @@ export function EditNameSheet({ visible, name, username, onClose, onSave }: Edit
           onPress={() => setShowInProfile((value) => !value)}
           className="flex-row items-center justify-end gap-2">
           <Text className="text-neutral-500">Show in profile</Text>
-          <TickSquare set={showInProfile ? "bold" : "light"} primaryColor={showInProfile ? "#FF660A" : "#9CA3AF"} size={20} />
+          <SquareCheck color={showInProfile ? "#FF660A" : "#9CA3AF"} size={20} />
         </Pressable>
 
         <TextInput

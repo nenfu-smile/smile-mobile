@@ -1,6 +1,6 @@
+import { Bell as BellIcon, SquareCheck } from "lucide-react-native";
 import { useState } from "react";
 import { Text, View } from "react-native";
-import { Notification as BellIcon, TickSquare } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_NOTIFICATIONS } from "@/features/notifications/data/mock-notifications";
@@ -23,7 +23,7 @@ export function NotificationsScreen() {
     <SafeAreaView edges={["top"]} className="flex-1 bg-white">
       {justCleared ? (
         <View className="flex-row items-center gap-2 border-b border-primary bg-primary/10 px-6 py-4">
-          <TickSquare set="bold" primaryColor="#FF660A" size={20} />
+          <SquareCheck color="#FF660A" size={20} />
           <Text className="text-base font-medium text-neutral-900">
             Your Notification has been cleared
           </Text>
@@ -49,7 +49,7 @@ export function NotificationsScreen() {
 
       {isEmpty ? (
         <View className="flex-1 items-center justify-center gap-4">
-          <BellIcon set="bulk" primaryColor="#FF660A" secondaryColor="#FDE68A" size={64} />
+          <BellIcon color="#FF660A" size={64} />
           <Text className="text-lg text-neutral-500">No Notification Yet</Text>
         </View>
       ) : (
@@ -63,7 +63,7 @@ export function NotificationsScreen() {
                     className="h-12 w-12 items-center justify-center rounded-full"
                     style={{ backgroundColor: item.kind === "reminder" ? "#FFE4CC" : item.avatarColor }}>
                     {item.kind === "reminder" ? (
-                      <BellIcon set="bold" primaryColor="#FF660A" size={20} />
+                      <BellIcon color="#FF660A" size={20} />
                     ) : (
                       <Text className="text-sm font-semibold text-white">
                         {initials(item.description)}

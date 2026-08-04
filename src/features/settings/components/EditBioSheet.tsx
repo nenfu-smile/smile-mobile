@@ -1,6 +1,6 @@
+import { Pencil } from "lucide-react-native";
 import { useState } from "react";
 import { Modal, Pressable, Text, TextInput, View } from "react-native";
-import { Edit } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { PrimaryButton } from "@/shared/components/ui/primary-button";
@@ -30,7 +30,7 @@ export function EditBioSheet({ visible, bio, onClose, onSave }: EditBioSheetProp
         </Text>
 
         <View className="flex-row gap-2 rounded-2xl bg-neutral-100 p-4">
-          <Edit set="bold" primaryColor="#374151" size={16} />
+          <Pencil color="#374151" size={16} />
           <TextInput
             value={draft}
             onChangeText={(text) =>

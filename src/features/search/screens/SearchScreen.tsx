@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
+import { MapPin, User } from "lucide-react-native";
 import { useMemo, useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
-import { Location, User } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_EVENT_SEARCH_RESULTS } from "@/features/events/data/mock-events";
@@ -39,9 +39,9 @@ export function SearchScreen() {
           <Pressable key={item.id} className="flex-row items-center gap-3 border-b border-neutral-100 py-3">
             <View className="h-12 w-12 items-center justify-center rounded-full bg-neutral-100">
               {isPlaces ? (
-                <Location set="bold" primaryColor="#9CA3AF" size={20} />
+                <MapPin color="#9CA3AF" size={20} />
               ) : (
-                <User set="bold" primaryColor="#9CA3AF" size={20} />
+                <User color="#9CA3AF" size={20} />
               )}
             </View>
             <View className="flex-1">

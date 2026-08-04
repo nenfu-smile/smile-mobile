@@ -1,5 +1,5 @@
+import { Smartphone, TriangleAlert } from "lucide-react-native";
 import { Text, View } from "react-native";
-import { Danger, Scan } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { CURRENT_DEVICE, MOCK_ACTIVE_SESSIONS } from "@/features/settings/data/mock-devices";
@@ -15,13 +15,13 @@ export function DevicesScreen() {
 
       {/* Placeholder for the devices illustration */}
       <View className="mb-6 h-40 items-center justify-center rounded-3xl bg-white">
-        <Scan set="bold" primaryColor="#FF660A" size={40} />
+        <Smartphone color="#FF660A" size={40} />
       </View>
 
       <View className="rounded-2xl bg-white p-4">
         <View className="flex-row items-center gap-3">
           <View className="h-11 w-11 items-center justify-center rounded-2xl bg-primary">
-            <Scan set="bold" primaryColor="white" size={18} />
+            <Smartphone color="white" size={18} />
           </View>
           <View className="flex-1">
             <Text className="text-base font-semibold text-neutral-900">{CURRENT_DEVICE.name}</Text>
@@ -33,7 +33,7 @@ export function DevicesScreen() {
         <View className="my-4 h-px bg-neutral-100" />
 
         <View className="flex-row items-center gap-2">
-          <Danger set="bold" primaryColor="#EF4444" size={16} />
+          <TriangleAlert color="#EF4444" size={16} />
           <Text className="font-semibold text-red-500">Logout of all device</Text>
         </View>
       </View>
@@ -44,7 +44,7 @@ export function DevicesScreen() {
           <View key={session.id}>
             <View className="flex-row items-center gap-3 p-4">
               <View className="h-11 w-11 items-center justify-center rounded-2xl bg-primary">
-                <Scan set="bold" primaryColor="white" size={18} />
+                <Smartphone color="white" size={18} />
               </View>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-neutral-900">{session.name}</Text>
