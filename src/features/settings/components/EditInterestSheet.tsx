@@ -49,7 +49,7 @@ export function EditInterestSheet({
                   "flex-row items-center gap-2 rounded-full border px-5 py-3 active:opacity-80",
                   isSelected ? "border-neutral-900 bg-neutral-900" : "border-neutral-300 bg-transparent",
                 )}>
-                <Icon set="bold" primaryColor={isSelected ? "white" : "#171717"} size={18} />
+                <Icon color={isSelected ? "white" : "#171717"} size={18} />
                 <Text className={cn("text-base font-medium", isSelected ? "text-white" : "text-neutral-900")}>
                   {label}
                 </Text>

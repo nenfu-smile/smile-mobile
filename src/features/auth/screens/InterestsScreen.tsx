@@ -33,7 +33,7 @@ export function InterestsScreen() {
                 "flex-row items-center gap-2 rounded-full border px-5 py-3 active:opacity-80",
                 selected ? "border-neutral-900 bg-neutral-900" : "border-neutral-300 bg-transparent",
               )}>
-              <Icon set="bold" primaryColor={selected ? "white" : "#171717"} size={18} />
+              <Icon color={selected ? "white" : "#171717"} size={18} />
               <Text className={cn("text-base font-medium", selected ? "text-white" : "text-neutral-900")}>
                 {label}
               </Text>
