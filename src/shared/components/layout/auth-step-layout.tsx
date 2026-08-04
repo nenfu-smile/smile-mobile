@@ -15,6 +15,7 @@ interface AuthStepLayoutProps {
   icon?: ReactNode;
   children?: ReactNode;
   footer?: ReactNode;
+  cardMinHeight?: number;
 }
 
 export function AuthStepLayout({
@@ -24,6 +25,7 @@ export function AuthStepLayout({
   icon,
   children,
   footer,
+  cardMinHeight = 62,
 }: AuthStepLayoutProps) {
   return (
     <View className="flex-1 bg-neutral-900">
@@ -45,7 +47,8 @@ export function AuthStepLayout({
         intensity={40}
         tint="light"
         blurMethod="dimezisBlurViewSdk31Plus"
-        className="absolute inset-x-0 bottom-0 min-h-[62%] gap-6 rounded-t-[40px] px-6 pb-12 pt-10 overflow-hidden"
+        className="absolute inset-x-0 bottom-0 gap-6 rounded-t-[40px] px-6 pb-12 pt-10 overflow-hidden"
+        style={{ minHeight: `${cardMinHeight}%` }}
       >
         {icon}
 
