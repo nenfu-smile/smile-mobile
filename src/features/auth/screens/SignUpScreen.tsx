@@ -8,7 +8,11 @@ import { cn } from "@/lib/utils";
 import { BackButton } from "@/shared/components/ui/back-button";
 import { PrimaryButton } from "@/shared/components/ui/primary-button";
 
-const SOCIAL_PROVIDERS = ["Continue with Apple", "Continue with Google", "Continue with Facebook"];
+const SOCIAL_PROVIDERS = [
+  "Continue with Apple",
+  "Continue with Google",
+  "Continue with Facebook",
+];
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -25,7 +29,9 @@ export function SignUpScreen() {
       <BackButton />
 
       <View className="mt-8 gap-2">
-        <Text className="text-center text-3xl font-bold text-neutral-900">Welcome to Smile!</Text>
+        <Text className="text-center text-3xl font-bold text-neutral-900">
+          Welcome to Smile!
+        </Text>
         <Text className="text-center text-base text-neutral-500">
           Connect with people and events nearby, in real time.
         </Text>
@@ -47,19 +53,27 @@ export function SignUpScreen() {
             )}
           />
           {showError ? (
-            <Text className="px-2 text-sm text-red-500">Enter a valid email address</Text>
+            <Text className="px-2 text-sm text-red-500">
+              Enter a valid email address
+            </Text>
           ) : null}
         </View>
 
         <PrimaryButton
           label="Sign Up"
-          disabled={!isValidEmail}
-          onPress={() => router.push("/auth/signup/verify-email")}
+          //disabled={!isValidEmail}
+          onPress={() => {
+            console.log("Sign Up pressed with email:", email);
+            router.push("/auth/signup/verify-email");
+          }}
         />
 
         <Text className="text-center text-neutral-500">
           Already have an account?{" "}
-          <Text className="font-semibold text-primary" onPress={() => router.push("/auth/login")}>
+          <Text
+            className="font-semibold text-primary"
+            onPress={() => router.push("/auth/login")}
+          >
             Login
           </Text>
         </Text>
@@ -74,16 +88,19 @@ export function SignUpScreen() {
           {SOCIAL_PROVIDERS.map((provider) => (
             <Pressable
               key={provider}
-              className="items-center justify-center rounded-full border border-neutral-200 py-4 active:opacity-70">
-              <Text className="text-base font-semibold text-neutral-900">{provider}</Text>
+              className="items-center justify-center rounded-full border border-neutral-200 py-4 active:opacity-70"
+            >
+              <Text className="text-base font-semibold text-neutral-900">
+                {provider}
+              </Text>
             </Pressable>
           ))}
         </View>
       </View>
 
       <Text className="mt-auto pb-4 text-center text-xs text-neutral-400">
-        By tapping &apos;Sign Up&apos;, you agree to our Terms of Service and that you have read
-        our Privacy Policy.
+        By tapping &apos;Sign Up&apos;, you agree to our Terms of Service and
+        that you have read our Privacy Policy.
       </Text>
     </SafeAreaView>
   );
