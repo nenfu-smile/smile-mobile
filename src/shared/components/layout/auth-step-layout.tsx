@@ -51,7 +51,7 @@ export function AuthStepLayout({
           intensity={40}
           tint="light"
           blurMethod="dimezisBlurViewSdk31Plus"
-          className="absolute inset-0"
+          className="absolute inset-0 bg-white/60"
         />
 
         <View className="gap-6 px-6 pb-12 pt-10">

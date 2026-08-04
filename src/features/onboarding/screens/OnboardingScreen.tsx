@@ -28,9 +28,9 @@ export function OnboardingScreen() {
 
       <BlurView
         intensity={40}
-        tint="systemThickMaterialLight"
+        tint="light"
         blurMethod="dimezisBlurView"
-        className="absolute inset-x-0 bottom-0 gap-4 rounded-t-[40px] px-6 pb-12 pt-8 overflow-hidden"
+        className="absolute inset-x-0 bg-white/60 bottom-0 gap-4 rounded-t-[40px] px-6 pb-12 pt-8 overflow-hidden"
       >
         <Text className="text-center text-2xl font-bold text-neutral-900">
           Smile your way to Connect!
