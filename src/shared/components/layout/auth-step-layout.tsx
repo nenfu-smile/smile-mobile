@@ -25,7 +25,7 @@ export function AuthStepLayout({
   icon,
   children,
   footer,
-  cardMinHeight = 62,
+  cardMinHeight = 80,
 }: AuthStepLayoutProps) {
   return (
     <View className="flex-1 bg-neutral-900">
