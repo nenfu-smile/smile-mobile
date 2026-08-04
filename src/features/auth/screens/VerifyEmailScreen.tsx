@@ -15,6 +15,7 @@ export function VerifyEmailScreen() {
     <AuthStepLayout
       title="Let's verify your Email Address"
       description={`We've sent a confirmation link to ${email || "your email"}.`}
+      image={require("@/assets/images/verify-email.png")}
       footer={
         <PrimaryButton
           label="Verify Code"

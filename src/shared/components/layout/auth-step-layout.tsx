@@ -1,7 +1,7 @@
 import { BlurView } from "expo-blur";
 import { cssInterop } from "nativewind";
 import { type ReactNode } from "react";
-import { Text, View } from "react-native";
+import { Image, type ImageSourcePropType, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { BackButton } from "@/shared/components/ui/back-button";
@@ -11,6 +11,7 @@ cssInterop(BlurView, { className: "style" });
 interface AuthStepLayoutProps {
   title: string;
   description?: string;
+  image?: ImageSourcePropType;
   icon?: ReactNode;
   children?: ReactNode;
   footer?: ReactNode;
@@ -19,14 +20,19 @@ interface AuthStepLayoutProps {
 export function AuthStepLayout({
   title,
   description,
+  image,
   icon,
   children,
   footer,
 }: AuthStepLayoutProps) {
   return (
     <View className="flex-1 bg-neutral-900">
-      {/* Placeholder for this step's background photo — swap in a full-bleed <Image> here */}
-      <View className="absolute inset-0 bg-neutral-800" />
+      {image ? (
+        <Image source={image} className="absolute inset-0 h-full w-full" />
+      ) : (
+        // Placeholder for this step's background photo — swap in a full-bleed <Image> here
+        <View className="absolute inset-0 bg-neutral-800" />
+      )}
 
       <SafeAreaView
         edges={["top"]}
@@ -39,7 +45,7 @@ export function AuthStepLayout({
         intensity={40}
         tint="light"
         blurMethod="dimezisBlurViewSdk31Plus"
-        className="absolute inset-x-0 bottom-0 gap-6 rounded-t-[40px] px-6 pb-12 pt-10 overflow-hidden"
+        className="absolute inset-x-0 bottom-0 min-h-[62%] gap-6 rounded-t-[40px] px-6 pb-12 pt-10 overflow-hidden"
       >
         {icon}
 
