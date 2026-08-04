@@ -1,6 +1,6 @@
+import { CircleEllipsis, Heart, MessageCircle, Send, SlidersHorizontal } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { Chat as ChatIcon, Filter2, Heart, MoreCircle, Send } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { CommentsSheet } from "@/features/feed/components/CommentsSheet";
@@ -39,7 +39,7 @@ export function FeedScreen() {
           <Pressable
             onPress={() => setFilterVisible(true)}
             className="h-12 w-12 items-center justify-center rounded-full border border-neutral-200">
-            <Filter2 set="bold" primaryColor="#111827" size={18} />
+            <SlidersHorizontal color="#111827" size={18} />
           </Pressable>
         </View>
 
@@ -56,7 +56,7 @@ export function FeedScreen() {
                 <Text className="text-sm text-neutral-500">{post.location}</Text>
               </View>
               <Pressable onPress={() => setOptionsPost(post)}>
-                <MoreCircle set="light" primaryColor="#111827" size={22} />
+                <CircleEllipsis color="#111827" size={22} />
               </Pressable>
             </View>
 
@@ -73,17 +73,17 @@ export function FeedScreen() {
 
             <View className="mt-3 flex-row items-center gap-6">
               <View className="flex-row items-center gap-1">
-                <Heart set="light" primaryColor="#111827" size={20} />
+                <Heart color="#111827" size={20} />
                 <Text className="text-neutral-500">{post.likes}</Text>
               </View>
               <Pressable
                 onPress={() => setCommentsPostId(post.id)}
                 className="flex-row items-center gap-1">
-                <ChatIcon set="light" primaryColor="#111827" size={20} />
+                <MessageCircle color="#111827" size={20} />
                 <Text className="text-neutral-500">{post.comments}</Text>
               </Pressable>
               <View className="flex-row items-center gap-1">
-                <Send set="light" primaryColor="#111827" size={20} />
+                <Send color="#111827" size={20} />
                 <Text className="text-neutral-500">{post.shares}</Text>
               </View>
             </View>

@@ -1,7 +1,7 @@
 import { router } from "expo-router";
+import { Calendar, Clock, MapPin, Upload } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { Calendar, Location, TimeCircle, Upload } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_EVENT } from "@/features/events/data/mock-events";
@@ -31,7 +31,7 @@ export function EventDetailScreen() {
         className="absolute inset-x-0 top-0 flex-row items-center justify-between px-4 pt-2">
         <BackButton />
         <IconCircleButton onPress={() => setShareVisible(true)}>
-          <Upload set="bold" primaryColor="#111827" size={18} />
+          <Upload color="#111827" size={18} />
         </IconCircleButton>
       </SafeAreaView>
 
@@ -44,7 +44,7 @@ export function EventDetailScreen() {
           <View className="flex-1 gap-1 pr-3">
             <Text className="text-2xl font-bold text-neutral-900">{event.title}</Text>
             <View className="flex-row items-center gap-1">
-              <Location set="bold" primaryColor="#9CA3AF" size={14} />
+              <MapPin color="#9CA3AF" size={14} />
               <Text className="text-neutral-500">{event.distance}</Text>
             </View>
           </View>
@@ -55,14 +55,14 @@ export function EventDetailScreen() {
           <View className="gap-1">
             <Text className="text-sm text-neutral-500">Date</Text>
             <View className="flex-row items-center gap-2">
-              <Calendar set="bold" primaryColor="#111827" size={16} />
+              <Calendar color="#111827" size={16} />
               <Text className="text-base font-medium text-neutral-900">{event.date},</Text>
             </View>
           </View>
           <View className="gap-1">
             <Text className="text-sm text-neutral-500">Time</Text>
             <View className="flex-row items-center gap-2">
-              <TimeCircle set="bold" primaryColor="#111827" size={16} />
+              <Clock color="#111827" size={16} />
               <Text className="text-base font-medium text-neutral-900">{event.time}</Text>
             </View>
           </View>

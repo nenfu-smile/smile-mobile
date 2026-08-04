@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
+import { Phone, Send, Video } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { Calling, Send, Video } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_CHATS } from "@/features/chat/data/mock-chats";
@@ -44,10 +44,10 @@ export function ChatScreen() {
         </View>
 
         <Pressable className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100">
-          <Calling set="bold" primaryColor="#111827" size={18} />
+          <Phone color="#111827" size={18} />
         </Pressable>
         <Pressable className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100">
-          <Video set="bold" primaryColor="#111827" size={18} />
+          <Video color="#111827" size={18} />
         </Pressable>
 
         <View
@@ -115,7 +115,7 @@ export function ChatScreen() {
         <Pressable
           onPress={handleSend}
           className="h-12 w-12 items-center justify-center rounded-full bg-primary active:opacity-80">
-          <Send set="bold" primaryColor="white" size={18} />
+          <Send color="white" size={18} />
         </Pressable>
       </View>
     </SafeAreaView>

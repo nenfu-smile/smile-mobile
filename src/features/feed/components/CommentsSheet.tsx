@@ -1,6 +1,6 @@
+import { MessageCircle, Send } from "lucide-react-native";
 import { useState } from "react";
 import { Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { Chat, Send } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_COMMENTS } from "@/features/feed/data/mock-comments";
@@ -25,7 +25,7 @@ export function CommentsSheet({ visible, onClose }: CommentsSheetProps) {
 
         {comments.length === 0 ? (
           <View className="flex-1 items-center justify-center gap-4">
-            <Chat set="bulk" primaryColor="#FF660A" secondaryColor="#FDBA74" size={64} />
+            <MessageCircle color="#FF660A" size={64} />
             <Text className="text-lg text-neutral-500">No Comment Yet</Text>
           </View>
         ) : (
@@ -104,7 +104,7 @@ export function CommentsSheet({ visible, onClose }: CommentsSheetProps) {
           <Pressable
             onPress={() => setDraft("")}
             className="h-12 w-12 items-center justify-center rounded-full bg-primary active:opacity-80">
-            <Send set="bold" primaryColor="white" size={18} />
+            <Send color="white" size={18} />
           </Pressable>
         </View>
       </SafeAreaView>

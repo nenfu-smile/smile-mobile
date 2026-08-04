@@ -1,6 +1,6 @@
 import { router } from "expo-router";
+import { Bookmark, Pencil, TriangleAlert, Trash2 } from "lucide-react-native";
 import { Modal, Pressable, Text, View } from "react-native";
-import { Bookmark, Danger, Delete, Edit } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface PostOptionsSheetProps {
@@ -28,7 +28,7 @@ export function PostOptionsSheet({
         {isOwn ? (
           <>
             <Pressable className="flex-row items-start gap-3 active:opacity-70" onPress={onClose}>
-              <Edit set="bold" primaryColor="#111827" size={20} />
+              <Pencil color="#111827" size={20} />
               <Text className="text-base font-semibold text-neutral-900">Edit Post</Text>
             </Pressable>
 
@@ -38,7 +38,7 @@ export function PostOptionsSheet({
                 onClose();
                 onDelete?.();
               }}>
-              <Delete set="bold" primaryColor="#EF4444" size={20} />
+              <Trash2 color="#EF4444" size={20} />
               <Text className="text-base font-semibold text-red-500">Delete Post</Text>
             </Pressable>
           </>
@@ -46,7 +46,7 @@ export function PostOptionsSheet({
           <>
             <Pressable className="flex-row items-start gap-3 active:opacity-70" onPress={onClose}>
               <View className="h-9 w-9 items-center justify-center rounded-lg bg-neutral-900">
-                <Bookmark set="bold" primaryColor="white" size={16} />
+                <Bookmark color="white" size={16} />
               </View>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-neutral-900">Save Post</Text>
@@ -61,7 +61,7 @@ export function PostOptionsSheet({
                 router.push({ pathname: "/report", params: { kind: "post" } });
               }}>
               <View className="h-9 w-9 items-center justify-center rounded-lg bg-neutral-900">
-                <Danger set="bold" primaryColor="white" size={16} />
+                <TriangleAlert color="white" size={16} />
               </View>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-neutral-900">Report Post</Text>

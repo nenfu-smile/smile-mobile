@@ -1,8 +1,8 @@
 import { FlashList } from "@shopify/flash-list";
 import { router } from "expo-router";
+import { Search, Trash2 } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
-import { Delete, Search } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_CHATS, type ChatListItem } from "@/features/chat/data/mock-chats";
@@ -32,7 +32,7 @@ export function ChatListScreen() {
       <View className="flex-row items-center justify-between pt-2">
         <Text className="text-3xl font-bold text-neutral-900">All Chats</Text>
         <Pressable onPress={() => router.push("/search")}>
-          <Search set="light" primaryColor="#111827" size={22} />
+          <Search color="#111827" size={22} />
         </Pressable>
       </View>
 
@@ -87,7 +87,7 @@ export function ChatListScreen() {
             </View>
 
             <Pressable onPress={() => setPendingDelete(item)} className="p-2">
-              <Delete set="light" primaryColor="#D1D5DB" size={18} />
+              <Trash2 color="#D1D5DB" size={18} />
             </Pressable>
           </Pressable>
         )}
