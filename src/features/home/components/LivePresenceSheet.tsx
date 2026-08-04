@@ -1,6 +1,6 @@
+import { Clock, Compass, EyeOff, SquareX, Users } from "lucide-react-native";
 import { useState } from "react";
 import { Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { CloseSquare, Discovery, Hide, People, TimeCircle } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { cn } from "@/lib/utils";
@@ -26,9 +26,9 @@ const ACTIVITIES = ["Coffee & Chat", "Photography", "Gaming", "Shopping"];
 const DURATIONS = ["15 mins", "30 mins", "1 hour", "2 hours"];
 
 const VISIBILITY_OPTIONS = [
-  { key: "everyone", label: "Everyone", description: "Visible to everyone nearby", Icon: Discovery },
-  { key: "friends", label: "Friends Only", description: "Only your friends see your map pin", Icon: People },
-  { key: "ghost", label: "Invisible (Ghost Mode)", description: "Hide your map pin completely", Icon: Hide },
+  { key: "everyone", label: "Everyone", description: "Visible to everyone nearby", Icon: Compass },
+  { key: "friends", label: "Friends Only", description: "Only your friends see your map pin", Icon: Users },
+  { key: "ghost", label: "Invisible (Ghost Mode)", description: "Hide your map pin completely", Icon: EyeOff },
 ];
 
 interface LivePresenceSheetProps {
@@ -80,7 +80,7 @@ export function LivePresenceSheet({ visible, onClose }: LivePresenceSheetProps) 
           <Pressable
             onPress={onClose}
             className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100">
-            <CloseSquare set="bold" primaryColor="#6B7280" size={18} />
+            <SquareX color="#6B7280" size={18} />
           </Pressable>
         </View>
 
@@ -147,7 +147,7 @@ export function LivePresenceSheet({ visible, onClose }: LivePresenceSheetProps) 
                   "flex-row items-center gap-2 rounded-full border px-4 py-3",
                   duration === item ? "border-primary" : "border-neutral-200",
                 )}>
-                <TimeCircle set="bold" primaryColor={duration === item ? "#FF660A" : "#9CA3AF"} size={16} />
+                <Clock color={duration === item ? "#FF660A" : "#9CA3AF"} size={16} />
                 <Text
                   className={cn(
                     "text-sm font-medium",
@@ -169,7 +169,7 @@ export function LivePresenceSheet({ visible, onClose }: LivePresenceSheetProps) 
                 onPress={() => setVisibility(key)}
                 className="flex-row items-center gap-3 py-2">
                 <View className="h-11 w-11 items-center justify-center rounded-full bg-primary/10">
-                  <Icon set="bold" primaryColor="#FF660A" size={18} />
+                  <Icon color="#FF660A" size={18} />
                 </View>
                 <View className="flex-1">
                   <Text className="text-base font-medium text-neutral-900">{label}</Text>

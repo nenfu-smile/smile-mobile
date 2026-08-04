@@ -1,6 +1,6 @@
+import { SquareX } from "lucide-react-native";
 import { useState } from "react";
 import { Modal, Pressable, Text, TextInput, View } from "react-native";
-import { CloseSquare } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { cn } from "@/lib/utils";
@@ -39,7 +39,7 @@ export function BroadcastSheet({ visible, onClose, onOpenAdvanced }: BroadcastSh
           <Pressable
             onPress={onClose}
             className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100">
-            <CloseSquare set="bold" primaryColor="#6B7280" size={18} />
+            <SquareX color="#6B7280" size={18} />
           </Pressable>
         </View>
 

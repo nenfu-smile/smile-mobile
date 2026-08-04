@@ -1,16 +1,16 @@
 import { router } from "expo-router";
+import {
+  Bell,
+  Compass,
+  MapPin,
+  Search,
+  ShoppingBag,
+  SlidersHorizontal,
+  Star,
+  Users,
+} from "lucide-react-native";
 import { useRef, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import {
-  Buy,
-  Discovery,
-  Filter2,
-  Location,
-  Notification,
-  Search,
-  Star,
-  TwoUsers,
-} from "react-native-iconly";
 import MapView, { Circle, Marker, PROVIDER_DEFAULT, type Region } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -90,10 +90,10 @@ export function HomeMapScreen() {
           </View>
           <View className="flex-row gap-2">
             <IconCircleButton onPress={() => router.push("/search")}>
-              <Search set="bold" primaryColor="#111827" size={18} />
+              <Search color="#111827" size={18} />
             </IconCircleButton>
             <IconCircleButton showBadge onPress={() => router.push("/notifications")}>
-              <Notification set="bold" primaryColor="#111827" size={20} />
+              <Bell color="#111827" size={20} />
             </IconCircleButton>
           </View>
         </View>
@@ -111,40 +111,40 @@ export function HomeMapScreen() {
               </Pressable>
             ))}
             <IconCircleButton>
-              <Filter2 set="bold" primaryColor="#111827" size={18} />
+              <SlidersHorizontal color="#111827" size={18} />
             </IconCircleButton>
           </View>
         </ScrollView>
 
         <Pressable className="flex-row items-center gap-3 rounded-2xl bg-white p-3 active:opacity-80">
-          <Star set="bold" primaryColor="#FF660A" size={18} />
+          <Star color="#FF660A" size={18} />
           <View className="flex-1">
             <Text className="text-xs text-neutral-500">AI Discovery</Text>
             <Text className="text-sm font-semibold text-neutral-900">
               3 of your friends are near Jericho
             </Text>
           </View>
-          <Discovery set="bold" primaryColor="#9CA3AF" size={18} />
+          <Compass color="#9CA3AF" size={18} />
         </Pressable>
       </SafeAreaView>
 
       <View className="absolute left-4 top-1/3 gap-1 rounded-full bg-white p-1">
         <Pressable className="h-11 w-11 items-center justify-center rounded-full bg-primary">
-          <TwoUsers set="bold" primaryColor="white" size={20} />
+          <Users color="white" size={20} />
         </Pressable>
         <Pressable
           onPress={() => setBroadcastVisible(true)}
           className="h-11 w-11 items-center justify-center rounded-full">
-          <Discovery set="bold" primaryColor="#111827" size={20} />
+          <Compass color="#111827" size={20} />
         </Pressable>
         <Pressable className="h-11 w-11 items-center justify-center rounded-full">
-          <Buy set="bold" primaryColor="#111827" size={20} />
+          <ShoppingBag color="#111827" size={20} />
         </Pressable>
       </View>
 
       <View className="absolute right-4 top-1/3 items-center gap-3">
         <IconCircleButton>
-          <Location set="bold" primaryColor="#111827" size={18} />
+          <MapPin color="#111827" size={18} />
         </IconCircleButton>
         <View className="items-center overflow-hidden rounded-full bg-white">
           <Pressable onPress={() => zoom(0.5)} className="p-3">
@@ -169,7 +169,7 @@ export function HomeMapScreen() {
           <Text className="font-semibold text-neutral-900">{previewPerson.name}</Text>
           <Text className="text-sm text-neutral-500">{previewPerson.address}</Text>
           <View className="mt-0.5 flex-row items-center gap-1">
-            <Location set="bold" primaryColor="#9CA3AF" size={12} />
+            <MapPin color="#9CA3AF" size={12} />
             <Text className="text-sm text-neutral-500">{previewPerson.distance}</Text>
           </View>
         </View>

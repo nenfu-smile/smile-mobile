@@ -1,6 +1,6 @@
 import { router } from "expo-router";
+import { ShieldCheck } from "lucide-react-native";
 import { Text, View } from "react-native";
-import { ShieldDone } from "react-native-iconly";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { BackButton } from "@/shared/components/ui/back-button";
@@ -15,7 +15,7 @@ export function RecoverSuccessScreen() {
 
       <View className="flex-1 items-center justify-center">
         <View className="h-28 w-28 items-center justify-center rounded-full bg-white/20">
-          <ShieldDone set="bold" primaryColor="white" size={56} />
+          <ShieldCheck color="white" size={56} />
         </View>
       </View>
 

@@ -1,6 +1,6 @@
 import { router } from "expo-router";
+import { Camera } from "lucide-react-native";
 import { Pressable } from "react-native";
-import { Camera } from "react-native-iconly";
 
 import { AuthStepLayout } from "@/shared/components/layout/auth-step-layout";
 import { PrimaryButton } from "@/shared/components/ui/primary-button";
@@ -14,7 +14,7 @@ export function PhotoPickerScreen() {
       <Pressable
         // TODO: wire up expo-image-picker to actually select/capture a photo
         className="h-40 w-40 items-center justify-center self-center rounded-full border-2 border-primary bg-primary/10 active:opacity-80">
-        <Camera set="bold" primaryColor="#171717" size={28} />
+        <Camera color="#171717" size={28} />
       </Pressable>
     </AuthStepLayout>
   );
