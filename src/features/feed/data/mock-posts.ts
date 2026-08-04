@@ -10,6 +10,7 @@ export interface FeedPost {
   likes: string;
   comments: string;
   shares: string;
+  isOwn?: boolean;
 }
 
 export const MOCK_POSTS: FeedPost[] = [
@@ -35,5 +36,17 @@ export const MOCK_POSTS: FeedPost[] = [
     likes: "234k",
     comments: "234k",
     shares: "234k",
+  },
+  {
+    id: "3",
+    authorName: "You",
+    location: "Jericho, Ibadan",
+    avatarColor: "#6D28D9",
+    type: "text",
+    text: "Had an amazing time at the tech meetup today, can't wait for the next one!",
+    likes: "12k",
+    comments: "340",
+    shares: "56",
+    isOwn: true,
   },
 ];
