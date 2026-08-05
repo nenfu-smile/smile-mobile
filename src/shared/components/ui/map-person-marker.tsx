@@ -1,17 +1,8 @@
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 interface MapPersonMarkerProps {
   name: string;
   avatarColor: string;
-}
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((word) => word[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
 }
 
 export function MapPersonMarker({ name, avatarColor }: MapPersonMarkerProps) {
@@ -31,7 +22,11 @@ export function MapPersonMarker({ name, avatarColor }: MapPersonMarkerProps) {
         <View
           className="items-center justify-center overflow-hidden rounded-full border-[3px] border-primary"
           style={{ width: 56, height: 56, backgroundColor: avatarColor }}>
-          <Text className="text-sm font-semibold text-white">{initials(name)}</Text>
+          {/* Placeholder photo for now — swap in each person's real avatar once available */}
+          <Image
+            source={require("@/assets/images/pinpoint.png")}
+            className="h-full w-full"
+          />
         </View>
       </View>
 
