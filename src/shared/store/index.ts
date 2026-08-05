@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { useShallow } from "zustand/react/shallow";
 import { createMMKV } from "react-native-mmkv";
 
 const storage = createMMKV();
@@ -37,8 +38,10 @@ export const useStore = create<AppState>()(
 export const useUser = () => useStore((state) => state.user);
 export const useToken = () => useStore((state) => state.token);
 export const useAuthActions = () =>
-  useStore((state) => ({
-    setUser: state.setUser,
-    setToken: state.setToken,
-    logout: state.logout,
-  }));
+  useStore(
+    useShallow((state) => ({
+      setUser: state.setUser,
+      setToken: state.setToken,
+      logout: state.logout,
+    })),
+  );
