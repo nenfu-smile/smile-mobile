@@ -19,7 +19,7 @@ export function CommentsSheet({ visible, onClose }: CommentsSheetProps) {
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <Pressable className="flex-1 bg-black/40" onPress={onClose} />
 
-      <SafeAreaView edges={["bottom"]} className="h-[75%] rounded-t-[28px] bg-white px-6 pt-3">
+      <SafeAreaView edges={["bottom"]} className="h-[75%] rounded-t-[40px] bg-white px-6 pt-3">
         <View className="mb-4 h-1 w-10 self-center rounded-full bg-neutral-200" />
         <Text className="mb-4 text-center text-2xl font-bold text-neutral-900">Comments</Text>
 

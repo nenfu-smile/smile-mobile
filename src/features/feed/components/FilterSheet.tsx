@@ -48,7 +48,7 @@ export function FilterSheet({ visible, onClose, onApply }: FilterSheetProps) {
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <Pressable className="flex-1 bg-black/40" onPress={onClose} />
 
-      <SafeAreaView edges={["bottom"]} className="gap-4 rounded-t-[28px] bg-white px-6 pb-6 pt-3">
+      <SafeAreaView edges={["bottom"]} className="gap-4 rounded-t-[40px] bg-white px-6 pb-6 pt-3">
         <View className="h-1 w-10 self-center rounded-full bg-neutral-200" />
         <Text className="text-2xl font-bold text-neutral-900">Filter By</Text>
 

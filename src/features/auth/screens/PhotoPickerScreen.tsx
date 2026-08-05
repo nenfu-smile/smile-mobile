@@ -1,11 +1,21 @@
 import { router } from "expo-router";
 import { Camera } from "lucide-react-native";
-import { Pressable } from "react-native";
+import { Image, Pressable } from "react-native";
 
+import { useSignupStore } from "@/features/auth/store/signup-store";
+import { useImagePicker } from "@/shared/hooks/use-image-picker";
 import { AuthStepLayout } from "@/shared/components/layout/auth-step-layout";
 import { PrimaryButton } from "@/shared/components/ui/primary-button";
 
 export function PhotoPickerScreen() {
+  const { photoUri, setPhotoUri } = useSignupStore();
+  const { pickImage } = useImagePicker();
+
+  const handlePick = async () => {
+    const uri = await pickImage();
+    if (uri) setPhotoUri(uri);
+  };
+
   return (
     <AuthStepLayout
       title="Pick a Photo"
@@ -16,10 +26,14 @@ export function PhotoPickerScreen() {
       }
     >
       <Pressable
-        // TODO: wire up expo-image-picker to actually select/capture a photo
-        className="h-40 w-40 items-center justify-center self-center rounded-full border-2 border-primary bg-primary/10 active:opacity-80"
+        onPress={handlePick}
+        className="h-40 w-40 items-center justify-center self-center overflow-hidden rounded-full border-2 border-primary bg-primary/10 active:opacity-80"
       >
-        <Camera color="#171717" size={28} />
+        {photoUri ? (
+          <Image source={{ uri: photoUri }} className="h-full w-full" />
+        ) : (
+          <Camera color="#171717" size={28} />
+        )}
       </Pressable>
     </AuthStepLayout>
   );

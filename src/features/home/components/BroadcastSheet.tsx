@@ -28,7 +28,7 @@ export function BroadcastSheet({ visible, onClose, onOpenAdvanced }: BroadcastSh
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <Pressable className="flex-1 bg-black/40" onPress={onClose} />
 
-      <SafeAreaView edges={["bottom"]} className="gap-4 rounded-t-[28px] bg-white px-6 pb-6 pt-6">
+      <SafeAreaView edges={["bottom"]} className="gap-4 rounded-t-[40px] bg-white px-6 pb-6 pt-6">
         <View className="flex-row items-start justify-between">
           <View className="flex-1 pr-4">
             <Text className="text-2xl font-bold text-neutral-900">Broadcast Instant Meet</Text>

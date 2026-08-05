@@ -21,7 +21,7 @@ export function ConfirmDeleteModal({
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onCancel}>
       <Pressable className="flex-1 bg-black/40" onPress={onCancel} />
 
-      <SafeAreaView edges={["bottom"]} className="items-center gap-2 rounded-t-[28px] bg-white px-6 pb-6 pt-8">
+      <SafeAreaView edges={["bottom"]} className="items-center gap-2 rounded-t-[40px] bg-white px-6 pb-6 pt-8">
         <View className="h-16 w-16 items-center justify-center rounded-full bg-red-500">
           <SquareX color="white" size={28} />
         </View>

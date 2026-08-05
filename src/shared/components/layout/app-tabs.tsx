@@ -25,7 +25,7 @@ export default function AppTabs() {
     <Tabs>
       <TabSlot />
       <TabList asChild>
-        <Pressable className="absolute inset-x-0 bottom-0 flex-row items-center justify-between border-t border-neutral-100 bg-white px-8 pb-8 pt-3">
+        <Pressable className="absolute inset-x-0 bottom-0 flex-row items-center justify-between rounded-t-[40px] border-t border-neutral-100 bg-white px-8 pb-8 pt-3">
           <TabTrigger name="home" href="/home" asChild>
             <TabIcon Icon={MapPin} />
           </TabTrigger>
@@ -35,7 +35,7 @@ export default function AppTabs() {
 
           <Pressable
             onPress={() => setCreateMenuVisible((visible) => !visible)}
-            className="-translate-y-4 h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/40"
+            className="items-center justify-center -translate-y-4 rounded-full shadow-lg h-14 w-14 bg-primary shadow-primary/40"
           >
             {createMenuVisible ? (
               <SquareX color="white" size={24} />

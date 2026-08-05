@@ -74,7 +74,7 @@ export function LivePresenceSheet({ visible, onClose }: LivePresenceSheetProps) 
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <Pressable className="flex-1 bg-black/40" onPress={onClose} />
 
-      <SafeAreaView edges={["bottom"]} className="max-h-[85%] rounded-t-[28px] bg-white">
+      <SafeAreaView edges={["bottom"]} className="max-h-[85%] rounded-t-[40px] bg-white">
         <View className="flex-row items-start justify-between px-6 pt-6">
           <Text className="text-2xl font-bold text-neutral-900">Set Your Live Presence</Text>
           <Pressable

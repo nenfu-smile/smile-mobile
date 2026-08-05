@@ -23,7 +23,7 @@ export function ShareSheet({ visible, onClose }: ShareSheetProps) {
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
       <Pressable className="flex-1 bg-black/40" onPress={onClose} />
 
-      <SafeAreaView edges={["bottom"]} className="rounded-t-[28px] bg-white px-6 pt-6">
+      <SafeAreaView edges={["bottom"]} className="rounded-t-[40px] bg-white px-6 pt-6">
         <View className="mb-4 flex-row items-center justify-between">
           <Text className="text-2xl font-bold text-neutral-900">Share this article</Text>
           <Pressable

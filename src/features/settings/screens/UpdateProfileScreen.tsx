@@ -1,6 +1,6 @@
 import { Camera } from "lucide-react-native";
 import { useState } from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { EditBioSheet } from "@/features/settings/components/EditBioSheet";
@@ -9,6 +9,7 @@ import { EditNameSheet } from "@/features/settings/components/EditNameSheet";
 import { MOCK_SELF_PROFILE } from "@/features/people/data/mock-people";
 import { BackButton } from "@/shared/components/ui/back-button";
 import { INTERESTS } from "@/shared/config/interests";
+import { useImagePicker } from "@/shared/hooks/use-image-picker";
 
 function initials(name: string) {
   return name
@@ -28,6 +29,14 @@ export function UpdateProfileScreen() {
   const [editNameVisible, setEditNameVisible] = useState(false);
   const [editBioVisible, setEditBioVisible] = useState(false);
   const [editInterestVisible, setEditInterestVisible] = useState(false);
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
+
+  const { pickImage } = useImagePicker();
+
+  const handlePickAvatar = async () => {
+    const uri = await pickImage();
+    if (uri) setAvatarUri(uri);
+  };
 
   return (
     <View className="flex-1 bg-white">
@@ -35,7 +44,9 @@ export function UpdateProfileScreen() {
         <SafeAreaView edges={["top"]} className="flex-row items-center justify-between px-4">
           <BackButton />
           <Text className="text-2xl font-bold text-white">Update Profile</Text>
-          <Pressable className="h-11 w-11 items-center justify-center rounded-full bg-white">
+          <Pressable
+            onPress={handlePickAvatar}
+            className="h-11 w-11 items-center justify-center rounded-full bg-white">
             <Camera color="#111827" size={18} />
           </Pressable>
         </SafeAreaView>
@@ -44,11 +55,17 @@ export function UpdateProfileScreen() {
       <View className="items-center">
         <View className="relative -mt-12">
           <View
-            className="h-24 w-24 items-center justify-center rounded-full border-4 border-white"
+            className="h-24 w-24 items-center justify-center overflow-hidden rounded-full border-4 border-white"
             style={{ backgroundColor: MOCK_SELF_PROFILE.avatarColor }}>
-            <Text className="text-2xl font-bold text-white">{initials(name)}</Text>
+            {avatarUri ? (
+              <Image source={{ uri: avatarUri }} className="h-full w-full" />
+            ) : (
+              <Text className="text-2xl font-bold text-white">{initials(name)}</Text>
+            )}
           </View>
-          <Pressable className="absolute bottom-0 right-0 h-8 w-8 items-center justify-center rounded-full bg-primary border-2 border-white">
+          <Pressable
+            onPress={handlePickAvatar}
+            className="absolute bottom-0 right-0 h-8 w-8 items-center justify-center rounded-full bg-primary border-2 border-white">
             <Camera color="white" size={14} />
           </Pressable>
         </View>

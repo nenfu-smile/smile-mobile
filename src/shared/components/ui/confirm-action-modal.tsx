@@ -29,7 +29,7 @@ export function ConfirmActionModal({
     <Modal visible={visible} animationType="slide" transparent onRequestClose={onCancel}>
       <Pressable className="flex-1 bg-black/40" onPress={onCancel} />
 
-      <SafeAreaView edges={["bottom"]} className="gap-6 rounded-t-[28px] bg-white px-6 pb-6 pt-8">
+      <SafeAreaView edges={["bottom"]} className="gap-6 rounded-t-[40px] bg-white px-6 pb-6 pt-8">
         <View className="gap-2">
           <Text className="text-center text-2xl font-bold text-neutral-900">{title}</Text>
           {description ? (
