@@ -1,5 +1,18 @@
-import { Tabs, TabList, TabSlot, TabTrigger, type TabTriggerSlotProps } from "expo-router/ui";
-import { MapPin, MessageCircle, Play, Plus, SquareX, User } from "lucide-react-native";
+import {
+  TabList,
+  Tabs,
+  TabSlot,
+  TabTrigger,
+  type TabTriggerSlotProps,
+} from "expo-router/ui";
+import {
+  MapPin,
+  MessageCircle,
+  Play,
+  Plus,
+  SquareX,
+  User,
+} from "lucide-react-native";
 import { useState } from "react";
 import { Pressable } from "react-native";
 
@@ -13,7 +26,7 @@ export default function AppTabs() {
       <TabSlot />
       <TabList asChild>
         <Pressable className="absolute inset-x-0 bottom-0 flex-row items-center justify-between border-t border-neutral-100 bg-white px-8 pb-8 pt-3">
-          <TabTrigger name="index" href="/" asChild>
+          <TabTrigger name="home" href="/home" asChild>
             <TabIcon Icon={MapPin} />
           </TabTrigger>
           <TabTrigger name="explore" href="/explore" asChild>
@@ -22,7 +35,8 @@ export default function AppTabs() {
 
           <Pressable
             onPress={() => setCreateMenuVisible((visible) => !visible)}
-            className="-translate-y-4 h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/40">
+            className="-translate-y-4 h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg shadow-primary/40"
+          >
             {createMenuVisible ? (
               <SquareX color="white" size={24} />
             ) : (
@@ -39,14 +53,21 @@ export default function AppTabs() {
         </Pressable>
       </TabList>
 
-      <CreateMenuSheet visible={createMenuVisible} onClose={() => setCreateMenuVisible(false)} />
+      <CreateMenuSheet
+        visible={createMenuVisible}
+        onClose={() => setCreateMenuVisible(false)}
+      />
     </Tabs>
   );
 }
 
 type IconComponent = typeof MapPin;
 
-function TabIcon({ Icon, isFocused, ...props }: TabTriggerSlotProps & { Icon: IconComponent }) {
+function TabIcon({
+  Icon,
+  isFocused,
+  ...props
+}: TabTriggerSlotProps & { Icon: IconComponent }) {
   return (
     <Pressable {...props} className="items-center justify-center p-2">
       <Icon color={isFocused ? "#FF660A" : "#9CA3AF"} size={24} />

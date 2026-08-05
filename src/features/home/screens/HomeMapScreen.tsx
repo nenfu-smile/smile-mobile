@@ -20,6 +20,7 @@ import { JERICHO_REGION, MOCK_NEARBY_PEOPLE } from "@/features/home/data/mock-ne
 import { cn } from "@/lib/utils";
 import { IconCircleButton } from "@/shared/components/ui/icon-circle-button";
 import { AddButton } from "@/shared/components/ui/list-row";
+import { MapPersonMarker } from "@/shared/components/ui/map-person-marker";
 
 const FILTERS = ["All", "Friends", "Events", "Business"];
 
@@ -68,11 +69,7 @@ export function HomeMapScreen() {
         />
         {MOCK_NEARBY_PEOPLE.map((person) => (
           <Marker key={person.id} coordinate={person.coordinate}>
-            <View
-              className="h-12 w-12 items-center justify-center rounded-full border-2 border-primary"
-              style={{ backgroundColor: person.avatarColor }}>
-              <Text className="text-xs font-semibold text-white">{initials(person.name)}</Text>
-            </View>
+            <MapPersonMarker name={person.name} avatarColor={person.avatarColor} />
           </Marker>
         ))}
       </MapView>
