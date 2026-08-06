@@ -1,3 +1,4 @@
+import { usePathname } from "expo-router";
 import {
   TabList,
   Tabs,
@@ -18,14 +19,23 @@ import { Pressable } from "react-native";
 
 import { CreateMenuSheet } from "@/shared/components/layout/create-menu-sheet";
 
+const HIDDEN_TAB_BAR_SUFFIXES = ["/call", "/video-call"];
+
 export default function AppTabs() {
   const [createMenuVisible, setCreateMenuVisible] = useState(false);
+  const pathname = usePathname();
+  const hideTabBar = HIDDEN_TAB_BAR_SUFFIXES.some((suffix) =>
+    pathname.endsWith(suffix),
+  );
 
   return (
     <Tabs>
       <TabSlot />
       <TabList asChild>
-        <Pressable className="absolute inset-x-0 bottom-0 flex-row items-center justify-between rounded-t-[40px] border-t border-neutral-100 bg-white px-8 pb-8 pt-3">
+        <Pressable
+          pointerEvents={hideTabBar ? "none" : "auto"}
+          style={{ display: hideTabBar ? "none" : "flex" }}
+          className="absolute inset-x-0 bottom-0 flex-row items-center justify-between rounded-t-[40px] border-t border-neutral-100 bg-white px-8 pb-8 pt-3">
           <TabTrigger name="home" href="/home" asChild>
             <TabIcon Icon={MapPin} />
           </TabTrigger>

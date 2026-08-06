@@ -62,16 +62,21 @@ export function FeedScreen() {
               </Pressable>
             </View>
 
-            {post.type === "poster" ? (
-              // Placeholder for the post's image/poster — swap in a real <Image> here
-              <View
-                className="mt-3 h-64 items-center justify-center rounded-2xl"
-                style={{ backgroundColor: post.posterColor }}>
-                <Text className="text-lg font-bold text-white">{post.posterLabel}</Text>
-              </View>
-            ) : (
+            {post.type === "text" ? (
               <Text className="mt-3 text-base text-neutral-700">{post.text}</Text>
-            )}
+            ) : null}
+
+            <Image
+              source={POST_IMAGE}
+              resizeMode="cover"
+              className="mt-3 h-64 w-full rounded-2xl"
+            />
+
+            {post.type === "poster" ? (
+              <Text className="mt-2 text-base font-semibold text-neutral-900">
+                {post.posterLabel}
+              </Text>
+            ) : null}
 
             <View className="mt-3 flex-row items-center gap-6">
               <View className="flex-row items-center gap-1">
