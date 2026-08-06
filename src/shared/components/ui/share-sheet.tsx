@@ -3,7 +3,7 @@ import {
   CircleEllipsis,
   MessageCircle,
   Send,
-  SquareX,
+  X,
 } from "lucide-react-native";
 import { Pressable, Text, View } from "react-native";
 
@@ -40,7 +40,7 @@ export function ShareSheet({ visible, onClose }: ShareSheetProps) {
           onPress={onClose}
           className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100"
         >
-          <SquareX color="#6B7280" size={18} />
+          <X color="#6B7280" size={18} />
         </Pressable>
       </View>
 

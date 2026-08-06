@@ -1,4 +1,4 @@
-import { Clock, Compass, EyeOff, SquareX, Users } from "lucide-react-native";
+import { Clock, Compass, EyeOff, X, Users } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
@@ -108,7 +108,7 @@ export function LivePresenceSheet({
           onPress={onClose}
           className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100"
         >
-          <SquareX color="#6B7280" size={18} />
+          <X color="#6B7280" size={18} />
         </Pressable>
       </View>
 

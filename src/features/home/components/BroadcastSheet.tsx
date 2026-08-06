@@ -1,4 +1,4 @@
-import { SquareX } from "lucide-react-native";
+import { X } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable, Text, TextInput, View } from "react-native";
 
@@ -48,7 +48,7 @@ export function BroadcastSheet({
           onPress={onClose}
           className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100"
         >
-          <SquareX color="#6B7280" size={18} />
+          <X color="#6B7280" size={18} />
         </Pressable>
       </View>
 
