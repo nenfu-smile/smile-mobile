@@ -65,8 +65,16 @@ export function VideoCallScreen() {
     return () => clearInterval(interval);
   }, []);
 
-  const other = { name: chat.name, avatarColor: chat.avatarColor, avatarImage: chat.avatarImage };
-  const self = { name: MOCK_SELF_PROFILE.name, avatarColor: MOCK_SELF_PROFILE.avatarColor, avatarImage: undefined };
+  const other = {
+    name: chat.name,
+    avatarColor: chat.avatarColor,
+    avatarImage: chat.avatarImage,
+  };
+  const self = {
+    name: MOCK_SELF_PROFILE.name,
+    avatarColor: MOCK_SELF_PROFILE.avatarColor,
+    avatarImage: undefined,
+  };
   const main = selfIsMain ? self : other;
   const pip = selfIsMain ? other : self;
 
@@ -75,7 +83,10 @@ export function VideoCallScreen() {
       <VideoFeed {...main} />
       <View className="absolute inset-0 bg-black/10" />
 
-      <SafeAreaView edges={["top"]} className="flex-row items-start justify-between px-6 pt-4">
+      <SafeAreaView
+        edges={["top"]}
+        className="flex-row items-start justify-between px-6 pt-4"
+      >
         <BackButton />
 
         <Pressable
@@ -87,10 +98,15 @@ export function VideoCallScreen() {
       </SafeAreaView>
 
       <View className="absolute inset-x-0 top-1/2 items-center gap-1 px-8">
-        <Text className="text-2xl font-bold text-white" style={{ textShadowColor: "rgba(0,0,0,0.5)", textShadowRadius: 6 }}>
+        <Text
+          className="text-2xl font-bold text-white"
+          style={{ textShadowColor: "rgba(0,0,0,0.5)", textShadowRadius: 6 }}
+        >
           {chat.name}
         </Text>
-        <Text className="text-base text-white/80">{formatDuration(duration)}</Text>
+        <Text className="text-base text-white/80">
+          {formatDuration(duration)}
+        </Text>
       </View>
 
       <View className="overflow-hidden rounded-t-[40px]">
@@ -100,7 +116,10 @@ export function VideoCallScreen() {
           blurMethod="dimezisBlurViewSdk31Plus"
           className="absolute inset-0 bg-black/30"
         />
-        <SafeAreaView edges={["bottom"]} className="items-center gap-6 px-6 pt-4">
+        <SafeAreaView
+          edges={["bottom"]}
+          className="items-center gap-6 px-6 pt-4"
+        >
           <View className="h-1 w-10 rounded-full bg-white/30" />
           <View className="flex-row items-center justify-center gap-8 pb-4">
             <CallControlButton

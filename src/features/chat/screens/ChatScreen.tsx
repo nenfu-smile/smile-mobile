@@ -1,11 +1,21 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { Phone, Send, Video } from "lucide-react-native";
 import { useState } from "react";
-import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_CHATS } from "@/features/chat/data/mock-chats";
-import { MOCK_MESSAGES, type ChatMessage } from "@/features/chat/data/mock-messages";
+import {
+  MOCK_MESSAGES,
+  type ChatMessage,
+} from "@/features/chat/data/mock-messages";
 import { cn } from "@/lib/utils";
 import { BackButton } from "@/shared/components/ui/back-button";
 
@@ -28,7 +38,12 @@ export function ChatScreen() {
     if (!draft.trim()) return;
     setMessages((current) => [
       ...current,
-      { id: `local-${current.length}`, text: draft.trim(), fromMe: true, timestamp: "Now" },
+      {
+        id: `local-${current.length}`,
+        text: draft.trim(),
+        fromMe: true,
+        timestamp: "Now",
+      },
     ]);
     setDraft("");
   };
@@ -39,31 +54,52 @@ export function ChatScreen() {
         <BackButton />
 
         <View className="flex-1">
-          <Text className="text-lg font-bold text-neutral-900">{chat.name}</Text>
+          <Text className="text-lg font-bold text-neutral-900">
+            {chat.name}
+          </Text>
           <Text className="text-sm text-neutral-400">Typing...</Text>
         </View>
 
-        <Pressable className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100">
+        <Pressable
+          onPress={() => router.push(`/chat/${chat.id}/call`)}
+          className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100"
+        >
           <Phone color="#111827" size={18} />
         </Pressable>
-        <Pressable className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100">
+        <Pressable
+          onPress={() => router.push(`/chat/${chat.id}/video-call`)}
+          className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100"
+        >
           <Video color="#111827" size={18} />
         </Pressable>
 
-        <View
-          className="h-11 w-11 items-center justify-center rounded-full border-2 border-primary"
-          style={{ backgroundColor: chat.avatarColor }}>
-          <Text className="text-xs font-semibold text-white">{initials(chat.name)}</Text>
-        </View>
+        <Pressable
+          onPress={() => router.push(`/chat/${chat.id}/profile`)}
+          className="h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-primary"
+          style={{ backgroundColor: chat.avatarColor }}
+        >
+          {chat.avatarImage ? (
+            <Image source={chat.avatarImage} className="h-full w-full" />
+          ) : (
+            <Text className="text-xs font-semibold text-white">
+              {initials(chat.name)}
+            </Text>
+          )}
+        </Pressable>
       </View>
 
-      <ScrollView className="flex-1 px-4" contentContainerStyle={{ paddingVertical: 16 }}>
+      <ScrollView
+        className="flex-1 px-4"
+        contentContainerStyle={{ paddingVertical: 16 }}
+      >
         {messages.map((message) => (
           <View key={message.id}>
             {message.dateLabel ? (
               <View className="my-4 flex-row items-center gap-3">
                 <View className="h-px flex-1 bg-primary/40" />
-                <Text className="text-sm text-neutral-500">{message.dateLabel}</Text>
+                <Text className="text-sm text-neutral-500">
+                  {message.dateLabel}
+                </Text>
                 <View className="h-px flex-1 bg-primary/40" />
               </View>
             ) : null}
@@ -72,10 +108,12 @@ export function ChatScreen() {
               className={cn(
                 "mb-1 max-w-[80%] flex-row items-start gap-2",
                 message.fromMe ? "ml-auto flex-row-reverse" : "",
-              )}>
+              )}
+            >
               <View
                 className="h-8 w-8 items-center justify-center rounded-full"
-                style={{ backgroundColor: chat.avatarColor }}>
+                style={{ backgroundColor: chat.avatarColor }}
+              >
                 <Text className="text-[10px] font-semibold text-white">
                   {message.fromMe ? "Me" : initials(chat.name)}
                 </Text>
@@ -85,8 +123,11 @@ export function ChatScreen() {
                 className={cn(
                   "rounded-2xl px-4 py-3",
                   message.fromMe ? "bg-primary" : "bg-neutral-100",
-                )}>
-                <Text className={message.fromMe ? "text-white" : "text-neutral-900"}>
+                )}
+              >
+                <Text
+                  className={message.fromMe ? "text-white" : "text-neutral-900"}
+                >
                   {message.text}
                 </Text>
               </View>
@@ -96,7 +137,8 @@ export function ChatScreen() {
               className={cn(
                 "mb-4 text-xs text-neutral-400",
                 message.fromMe ? "mr-10 text-right" : "ml-10",
-              )}>
+              )}
+            >
               {message.timestamp}
               {message.fromMe ? " ✓✓" : ""}
             </Text>
@@ -114,7 +156,8 @@ export function ChatScreen() {
         />
         <Pressable
           onPress={handleSend}
-          className="h-12 w-12 items-center justify-center rounded-full bg-primary active:opacity-80">
+          className="h-12 w-12 items-center justify-center rounded-full bg-primary active:opacity-80"
+        >
           <Send color="white" size={18} />
         </Pressable>
       </View>

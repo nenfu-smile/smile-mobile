@@ -37,7 +37,10 @@ function QuickAction({
   onPress: () => void;
 }) {
   return (
-    <Pressable onPress={onPress} className="items-center gap-2 active:opacity-70">
+    <Pressable
+      onPress={onPress}
+      className="items-center gap-2 active:opacity-70"
+    >
       <View className="h-14 w-14 items-center justify-center rounded-full bg-neutral-100">
         {icon}
       </View>
@@ -81,7 +84,9 @@ export function ChatProfileScreen() {
           )}
         </View>
         <View className="items-center gap-1">
-          <Text className="text-2xl font-bold text-neutral-900">{chat.name}</Text>
+          <Text className="text-2xl font-bold text-neutral-900">
+            {chat.name}
+          </Text>
           <Text className="text-sm text-neutral-400">
             {isGroup ? "Group Chat" : "Active now"}
           </Text>

@@ -83,7 +83,10 @@ export function AudioCallScreen() {
           blurMethod="dimezisBlurViewSdk31Plus"
           className="absolute inset-0 bg-black/30"
         />
-        <SafeAreaView edges={["bottom"]} className="items-center gap-6 px-6 pt-4">
+        <SafeAreaView
+          edges={["bottom"]}
+          className="items-center gap-6 px-6 pt-4"
+        >
           <View className="h-1 w-10 rounded-full bg-white/30" />
           <View className="flex-row items-center justify-center gap-8 pb-4">
             <CallControlButton

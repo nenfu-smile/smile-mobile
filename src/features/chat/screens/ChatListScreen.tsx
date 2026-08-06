@@ -99,7 +99,10 @@ export function ChatListScreen() {
                       style={{ backgroundColor: item.avatarColor }}
                     >
                       {item.avatarImage ? (
-                        <Image source={item.avatarImage} className="h-full w-full" />
+                        <Image
+                          source={item.avatarImage}
+                          className="h-full w-full"
+                        />
                       ) : (
                         <Text className="text-base font-semibold text-white">
                           {initials(item.name)}
