@@ -22,8 +22,8 @@ export default function TabLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={DefaultTheme}>
-        <PortalHost />
         <Stack screenOptions={{ headerShown: false }} />
+        <PortalHost />
         {/* <AnimatedSplashOverlay /> */}
         {/* <AppTabs /> */}
         {/* <Toaster /> */}

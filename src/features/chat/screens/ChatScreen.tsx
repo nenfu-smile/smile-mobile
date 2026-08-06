@@ -50,7 +50,7 @@ export function ChatScreen() {
 
   return (
     <SafeAreaView edges={["top"]} className="flex-1 bg-white">
-      <View className="flex-row items-center gap-3 border-b border-neutral-100 px-4 pb-3 pt-2">
+      <View className="flex-row items-center gap-3 px-4 pt-2 pb-3 border-b border-neutral-100">
         <BackButton />
 
         <View className="flex-1">
@@ -62,24 +62,24 @@ export function ChatScreen() {
 
         <Pressable
           onPress={() => router.push(`/chat/${chat.id}/call`)}
-          className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100"
+          className="items-center justify-center border h-11 w-11 rounded-2xl border-neutral-100"
         >
           <Phone color="#111827" size={18} />
         </Pressable>
         <Pressable
           onPress={() => router.push(`/chat/${chat.id}/video-call`)}
-          className="h-11 w-11 items-center justify-center rounded-2xl border border-neutral-100"
+          className="items-center justify-center border h-11 w-11 rounded-2xl border-neutral-100"
         >
           <Video color="#111827" size={18} />
         </Pressable>
 
         <Pressable
           onPress={() => router.push(`/chat/${chat.id}/profile`)}
-          className="h-11 w-11 items-center justify-center overflow-hidden rounded-full border-2 border-primary"
+          className="items-center justify-center overflow-hidden border-2 rounded-full h-11 w-11 border-primary"
           style={{ backgroundColor: chat.avatarColor }}
         >
           {chat.avatarImage ? (
-            <Image source={chat.avatarImage} className="h-full w-full" />
+            <Image source={chat.avatarImage} className="w-full h-full" />
           ) : (
             <Text className="text-xs font-semibold text-white">
               {initials(chat.name)}
@@ -95,12 +95,12 @@ export function ChatScreen() {
         {messages.map((message) => (
           <View key={message.id}>
             {message.dateLabel ? (
-              <View className="my-4 flex-row items-center gap-3">
-                <View className="h-px flex-1 bg-primary/40" />
+              <View className="flex-row items-center gap-3 my-4">
+                <View className="flex-1 h-px bg-primary/40" />
                 <Text className="text-sm text-neutral-500">
                   {message.dateLabel}
                 </Text>
-                <View className="h-px flex-1 bg-primary/40" />
+                <View className="flex-1 h-px bg-primary/40" />
               </View>
             ) : null}
 
@@ -111,7 +111,7 @@ export function ChatScreen() {
               )}
             >
               <View
-                className="h-8 w-8 items-center justify-center rounded-full"
+                className="items-center justify-center w-8 h-8 rounded-full"
                 style={{ backgroundColor: chat.avatarColor }}
               >
                 <Text className="text-[10px] font-semibold text-white">
@@ -146,17 +146,17 @@ export function ChatScreen() {
         ))}
       </ScrollView>
 
-      <View className="flex-row items-center gap-3 border-t border-neutral-100 px-4 py-3">
+      <View className="flex-row items-center gap-3 px-4 py-3 border-t border-neutral-100">
         <TextInput
           value={draft}
           onChangeText={setDraft}
           placeholder="Write your message"
           placeholderTextColor="#9CA3AF"
-          className="flex-1 rounded-full border border-neutral-200 px-5 py-3 text-base text-neutral-900"
+          className="flex-1 px-5 py-3 text-base border rounded-full border-neutral-200 text-neutral-900"
         />
         <Pressable
           onPress={handleSend}
-          className="h-12 w-12 items-center justify-center rounded-full bg-primary active:opacity-80"
+          className="items-center justify-center w-12 h-12 rounded-full bg-primary active:opacity-80"
         >
           <Send color="white" size={18} />
         </Pressable>

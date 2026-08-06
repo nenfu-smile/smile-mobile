@@ -25,13 +25,14 @@ import {
 import MapView, {
   Circle,
   Marker,
-  PROVIDER_DEFAULT,
+  PROVIDER_GOOGLE,
   type Region,
 } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { BroadcastSheet } from "@/features/home/components/BroadcastSheet";
 import { LivePresenceSheet } from "@/features/home/components/LivePresenceSheet";
+import { MUTED_MAP_STYLE } from "@/features/home/data/map-style";
 import {
   JERICHO_REGION,
   MOCK_NEARBY_PEOPLE,
@@ -101,12 +102,13 @@ export function HomeMapScreen() {
     <View className="flex-1 bg-white">
       <MapView
         ref={mapRef}
-        provider={PROVIDER_DEFAULT}
+        provider={PROVIDER_GOOGLE}
         style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
         initialRegion={JERICHO_REGION}
         onRegionChangeComplete={setRegion}
         showsUserLocation={locationGranted}
         showsMyLocationButton={false}
+        customMapStyle={MUTED_MAP_STYLE}
       >
         <Circle
           center={{
