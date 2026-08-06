@@ -9,7 +9,9 @@ import { PrimaryButton } from "@/shared/components/ui/primary-button";
 
 export function RecoverPhoneScreen() {
   const countryDialCode = useRecoverStore((state) => state.countryDialCode);
-  const setCountryDialCode = useRecoverStore((state) => state.setCountryDialCode);
+  const setCountryDialCode = useRecoverStore(
+    (state) => state.setCountryDialCode,
+  );
   const phoneNumber = useRecoverStore((state) => state.phoneNumber);
   const setPhoneNumber = useRecoverStore((state) => state.setPhoneNumber);
   const [pickerVisible, setPickerVisible] = useState(false);
@@ -18,18 +20,20 @@ export function RecoverPhoneScreen() {
     <AuthStepLayout
       title="Enter new mobile Number"
       description="We'll send you a verification code to keep your account secure."
+      image={require("@/assets/images/add-phone-number.png")}
       footer={
         <PrimaryButton
           label="Continue"
           disabled={phoneNumber.trim().length < 6}
           onPress={() => router.push("/auth/recover/verify-phone")}
         />
-      }>
-      <View className="flex-row items-center gap-2 rounded-full bg-white px-5 py-4">
+      }
+    >
+      <View className="flex-row items-center gap-2 px-5 py-4 bg-white rounded-full">
         <Pressable onPress={() => setPickerVisible(true)}>
           <Text className="text-base text-neutral-900">{countryDialCode}</Text>
         </Pressable>
-        <View className="h-6 w-px bg-neutral-200" />
+        <View className="w-px h-6 bg-neutral-200" />
         <TextInput
           value={phoneNumber}
           onChangeText={setPhoneNumber}

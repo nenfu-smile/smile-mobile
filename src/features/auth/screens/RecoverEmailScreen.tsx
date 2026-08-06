@@ -15,13 +15,15 @@ export function RecoverEmailScreen() {
     <AuthStepLayout
       title="Can we have your Email?"
       description="Enter the email address connected to your account to change your mobile phone number."
+      image={require("@/assets/images/add-phone-number.png")}
       footer={
         <PrimaryButton
           label="Continue"
           disabled={!EMAIL_PATTERN.test(email)}
           onPress={() => router.push("/auth/recover/verify-email")}
         />
-      }>
+      }
+    >
       <TextInput
         value={email}
         onChangeText={setEmail}
@@ -29,7 +31,7 @@ export function RecoverEmailScreen() {
         placeholderTextColor="#9CA3AF"
         keyboardType="email-address"
         autoCapitalize="none"
-        className="rounded-full bg-white px-5 py-4 text-base text-neutral-900"
+        className="px-5 py-4 text-base bg-white rounded-full text-neutral-900"
       />
     </AuthStepLayout>
   );

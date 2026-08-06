@@ -14,6 +14,7 @@ export function RecoverVerifyEmailScreen() {
   return (
     <AuthStepLayout
       title="Let's verify your Email Address"
+      image={require("@/assets/images/verify-email.png")}
       description={`We've sent a confirmation link to ${email || "your email"}.`}
       footer={
         <PrimaryButton
@@ -21,11 +22,13 @@ export function RecoverVerifyEmailScreen() {
           disabled={code.length < 5}
           onPress={() => router.push("/auth/recover/phone")}
         />
-      }>
+      }
+    >
       <OtpInput value={code} onChange={setCode} />
 
       <Text className="text-center text-neutral-600">
-        Didn&apos;t receive an email? <Text className="font-semibold text-neutral-900">Resend</Text>
+        Didn&apos;t receive an email?{" "}
+        <Text className="font-semibold text-neutral-900">Resend</Text>
       </Text>
     </AuthStepLayout>
   );

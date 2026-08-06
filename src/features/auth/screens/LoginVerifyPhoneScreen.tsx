@@ -9,7 +9,7 @@ export function LoginVerifyPhoneScreen() {
   return (
     <PhoneOtpCard
       phoneLabel={phoneNumber || "your number"}
-      onVerified={() => router.replace("/")}
+      onVerified={() => router.replace("/home")}
     />
   );
 }

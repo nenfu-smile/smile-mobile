@@ -22,7 +22,7 @@ export function PhotoPickerScreen() {
       description="Quality photo helps to create a sense of trust and connection, allowing potential matches to get a better sense of who you are."
       image={require("@/assets/images/photo_interest.png")}
       footer={
-        <PrimaryButton label="Next" onPress={() => router.replace("/")} />
+        <PrimaryButton label="Next" onPress={() => router.replace("/home")} />
       }
     >
       <Pressable

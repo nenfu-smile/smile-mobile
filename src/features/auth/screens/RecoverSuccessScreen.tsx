@@ -13,17 +13,19 @@ export function RecoverSuccessScreen() {
         <BackButton />
       </SafeAreaView>
 
-      <View className="flex-1 items-center justify-center">
-        <View className="h-28 w-28 items-center justify-center rounded-full bg-white/20">
+      <View className="items-center justify-center flex-1">
+        <View className="items-center justify-center rounded-full h-28 w-28 bg-white/20">
           <ShieldCheck color="white" size={56} />
         </View>
       </View>
 
-      <View className="gap-3 rounded-t-[40px] bg-white px-6 pb-12 pt-10">
-        <Text className="text-center text-3xl font-bold text-neutral-900">Nice!</Text>
-        <Text className="text-center text-base text-neutral-500">
-          Your mobile number has been changed successfully. You can now login with your new
-          number.
+      <View className="gap-3 rounded-t-[40px] bg-white px-6 pb-12 pt-1">
+        <Text className="text-3xl font-bold text-center text-neutral-900">
+          Nice!
+        </Text>
+        <Text className="text-base text-center text-neutral-500">
+          Your mobile number has been changed successfully. You can now login
+          with your new number.
         </Text>
 
         <PillArrowButton
