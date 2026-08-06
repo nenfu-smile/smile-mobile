@@ -1,9 +1,9 @@
 import { SquareX } from "lucide-react-native";
 import { useState } from "react";
-import { Modal, Pressable, Text, TextInput, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Pressable, Text, TextInput, View } from "react-native";
 
 import { cn } from "@/lib/utils";
+import { BottomSheet } from "@/shared/components/ui/bottom-sheet";
 import { PrimaryButton } from "@/shared/components/ui/primary-button";
 
 const STATUSES = [
@@ -20,69 +20,84 @@ interface BroadcastSheetProps {
   onOpenAdvanced: () => void;
 }
 
-export function BroadcastSheet({ visible, onClose, onOpenAdvanced }: BroadcastSheetProps) {
+export function BroadcastSheet({
+  visible,
+  onClose,
+  onOpenAdvanced,
+}: BroadcastSheetProps) {
   const [status, setStatus] = useState("exploring");
   const [customStatus, setCustomStatus] = useState("");
 
   return (
-    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
-      <Pressable className="flex-1 bg-black/40" onPress={onClose} />
+    <BottomSheet
+      visible={visible}
+      onClose={onClose}
+      className="gap-4 rounded-t-[40px] bg-white px-6 pb-6 pt-6"
+    >
+      <View className="flex-row items-start justify-between">
+        <View className="flex-1 pr-4">
+          <Text className="text-2xl font-bold text-neutral-900">
+            Broadcast Instant Meet
+          </Text>
+          <Text className="mt-1 text-base text-neutral-500">
+            Let nearby friends and people know you are free to hang out right
+            now
+          </Text>
+        </View>
+        <Pressable
+          onPress={onClose}
+          className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100"
+        >
+          <SquareX color="#6B7280" size={18} />
+        </Pressable>
+      </View>
 
-      <SafeAreaView edges={["bottom"]} className="gap-4 rounded-t-[40px] bg-white px-6 pb-6 pt-6">
-        <View className="flex-row items-start justify-between">
-          <View className="flex-1 pr-4">
-            <Text className="text-2xl font-bold text-neutral-900">Broadcast Instant Meet</Text>
-            <Text className="mt-1 text-base text-neutral-500">
-              Let nearby friends and people know you are free to hang out right now
-            </Text>
-          </View>
+      <View className="flex-row flex-wrap gap-2">
+        {STATUSES.map((item) => (
           <Pressable
-            onPress={onClose}
-            className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100">
-            <SquareX color="#6B7280" size={18} />
-          </Pressable>
-        </View>
-
-        <View className="flex-row flex-wrap gap-2">
-          {STATUSES.map((item) => (
-            <Pressable
-              key={item.key}
-              onPress={() => setStatus(item.key)}
+            key={item.key}
+            onPress={() => setStatus(item.key)}
+            className={cn(
+              "flex-row items-center gap-2 rounded-full border px-4 py-3",
+              status === item.key
+                ? "border-primary bg-primary"
+                : "border-neutral-200 bg-white",
+            )}
+          >
+            <Text>{item.emoji}</Text>
+            <Text
               className={cn(
-                "flex-row items-center gap-2 rounded-full border px-4 py-3",
-                status === item.key ? "border-primary bg-primary" : "border-neutral-200 bg-white",
-              )}>
-              <Text>{item.emoji}</Text>
-              <Text
-                className={cn(
-                  "text-sm font-medium",
-                  status === item.key ? "text-white" : "text-neutral-900",
-                )}>
-                {item.label}
-              </Text>
-            </Pressable>
-          ))}
-        </View>
-
-        <View className="flex-row items-center gap-2 rounded-full bg-neutral-100 p-1 pl-5">
-          <TextInput
-            value={customStatus}
-            onChangeText={setCustomStatus}
-            placeholder="Or type a custom status ("
-            placeholderTextColor="#9CA3AF"
-            className="flex-1 text-base text-neutral-900"
-          />
-          <Pressable className="rounded-full bg-primary px-5 py-3">
-            <Text className="text-sm font-semibold text-white">Enter</Text>
+                "text-sm font-medium",
+                status === item.key ? "text-white" : "text-neutral-900",
+              )}
+            >
+              {item.label}
+            </Text>
           </Pressable>
-        </View>
+        ))}
+      </View>
 
-        <Text className="text-center font-semibold text-primary" onPress={onOpenAdvanced}>
-          Customize mood, duration & privacy
-        </Text>
+      <View className="flex-row items-center gap-2 rounded-full bg-neutral-100 p-1 pl-5">
+        <TextInput
+          value={customStatus}
+          onChangeText={setCustomStatus}
+          placeholder="Or type a custom status ("
+          placeholderTextColor="#9CA3AF"
+          className="flex-1 text-base text-neutral-900"
+        />
+        <Pressable className="rounded-full bg-primary px-5 py-3">
+          <Text className="text-sm font-semibold text-white">Enter</Text>
+        </Pressable>
+      </View>
 
-        <PrimaryButton label="Broadcast I'm free" onPress={onClose} />
-      </SafeAreaView>
-    </Modal>
+      <Text
+        className="text-center font-semibold text-primary"
+        onPress={onOpenAdvanced}
+      >
+        Customize mood, duration & privacy
+      </Text>
+
+      <PrimaryButton label="Broadcast I'm free" onPress={onClose} />
+    </BottomSheet>
   );
 }

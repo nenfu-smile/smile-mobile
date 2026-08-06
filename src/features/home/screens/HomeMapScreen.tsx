@@ -195,7 +195,10 @@ export function HomeMapScreen() {
       </Pressable>
 
       <View className="absolute gap-1 p-1 bg-white rounded-full left-4 top-1/3">
-        <Pressable className="items-center justify-center rounded-full h-11 w-11">
+        <Pressable
+          onPress={() => router.push("/people")}
+          className="items-center justify-center rounded-full h-11 w-11"
+        >
           <Users color="#FF660A" size={20} />
         </Pressable>
         <Pressable
@@ -204,7 +207,10 @@ export function HomeMapScreen() {
         >
           <Radio color="#111827" size={20} />
         </Pressable>
-        <Pressable className="items-center justify-center rounded-full h-11 w-11">
+        <Pressable
+          onPress={() => router.push("/events")}
+          className="items-center justify-center rounded-full h-11 w-11"
+        >
           <BoomBox color="#111827" size={20} />
         </Pressable>
         <Pressable className="items-center justify-center rounded-full h-11 w-11">

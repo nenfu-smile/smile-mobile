@@ -1,6 +1,13 @@
-import { Camera, CircleEllipsis, MessageCircle, Send, SquareX } from "lucide-react-native";
-import { Modal, Pressable, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+  Camera,
+  CircleEllipsis,
+  MessageCircle,
+  Send,
+  SquareX,
+} from "lucide-react-native";
+import { Pressable, Text, View } from "react-native";
+
+import { BottomSheet } from "@/shared/components/ui/bottom-sheet";
 
 interface ShareSheetProps {
   visible: boolean;
@@ -20,36 +27,43 @@ const SHARE_OPTIONS = [
 
 export function ShareSheet({ visible, onClose }: ShareSheetProps) {
   return (
-    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
-      <Pressable className="flex-1 bg-black/40" onPress={onClose} />
-
-      <SafeAreaView edges={["bottom"]} className="rounded-t-[40px] bg-white px-6 pt-6">
-        <View className="mb-4 flex-row items-center justify-between">
-          <Text className="text-2xl font-bold text-neutral-900">Share this article</Text>
-          <Pressable
-            onPress={onClose}
-            className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100">
-            <SquareX color="#6B7280" size={18} />
-          </Pressable>
-        </View>
-
-        <Text className="mb-6 text-base text-neutral-600">
-          If you like this article share it with your friends.
+    <BottomSheet
+      visible={visible}
+      onClose={onClose}
+      className="rounded-t-[40px] bg-white px-6 pt-6"
+    >
+      <View className="mb-4 flex-row items-center justify-between">
+        <Text className="text-2xl font-bold text-neutral-900">
+          Share this article
         </Text>
+        <Pressable
+          onPress={onClose}
+          className="h-9 w-9 items-center justify-center rounded-xl bg-neutral-100"
+        >
+          <SquareX color="#6B7280" size={18} />
+        </Pressable>
+      </View>
 
-        <View className="mb-6 flex-row flex-wrap gap-x-4 gap-y-5">
-          {SHARE_OPTIONS.map(({ label, color, Icon }) => (
-            <Pressable key={label} className="w-[21%] items-center gap-2 active:opacity-70">
-              <View
-                className="h-16 w-16 items-center justify-center rounded-full"
-                style={{ backgroundColor: color }}>
-                <Icon color="white" size={24} />
-              </View>
-              <Text className="text-xs text-neutral-700">{label}</Text>
-            </Pressable>
-          ))}
-        </View>
-      </SafeAreaView>
-    </Modal>
+      <Text className="mb-6 text-base text-neutral-600">
+        If you like this article share it with your friends.
+      </Text>
+
+      <View className="mb-6 flex-row flex-wrap gap-x-4 gap-y-5">
+        {SHARE_OPTIONS.map(({ label, color, Icon }) => (
+          <Pressable
+            key={label}
+            className="w-[21%] items-center gap-2 active:opacity-70"
+          >
+            <View
+              className="h-16 w-16 items-center justify-center rounded-full"
+              style={{ backgroundColor: color }}
+            >
+              <Icon color="white" size={24} />
+            </View>
+            <Text className="text-xs text-neutral-700">{label}</Text>
+          </Pressable>
+        ))}
+      </View>
+    </BottomSheet>
   );
 }
