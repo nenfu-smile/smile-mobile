@@ -11,8 +11,8 @@ import {
   MessageCircle,
   Play,
   Plus,
-  SquareX,
   User,
+  X,
 } from "lucide-react-native";
 import { useState } from "react";
 import { Pressable } from "react-native";
@@ -35,7 +35,8 @@ export default function AppTabs() {
         <Pressable
           pointerEvents={hideTabBar ? "none" : "auto"}
           style={{ display: hideTabBar ? "none" : "flex" }}
-          className="absolute inset-x-0 bottom-0 flex-row items-center justify-between rounded-t-[40px] border-t border-neutral-100 bg-white px-8 pb-8 pt-3">
+          className="absolute inset-x-0 bottom-0 flex-row items-center justify-between rounded-t-[40px] border-t border-neutral-100 bg-white px-8 pb-8 pt-3"
+        >
           <TabTrigger name="home" href="/home" asChild>
             <TabIcon Icon={MapPin} />
           </TabTrigger>
@@ -48,7 +49,7 @@ export default function AppTabs() {
             className="items-center justify-center -translate-y-4 rounded-full shadow-lg h-14 w-14 bg-primary shadow-primary/40"
           >
             {createMenuVisible ? (
-              <SquareX color="white" size={24} />
+              <X color="white" size={24} />
             ) : (
               <Plus color="white" size={26} />
             )}

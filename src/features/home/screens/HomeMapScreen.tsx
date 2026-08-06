@@ -202,13 +202,13 @@ export function HomeMapScreen() {
           <Users color="#FF660A" size={20} />
         </Pressable>
         <Pressable
-          onPress={() => setBroadcastVisible(true)}
+          onPress={() => setLivePresenceVisible(true)}
           className="items-center justify-center rounded-full h-11 w-11"
         >
           <Radio color="#111827" size={20} />
         </Pressable>
         <Pressable
-          onPress={() => router.push("/events")}
+          onPress={() => setBroadcastVisible(true)}
           className="items-center justify-center rounded-full h-11 w-11"
         >
           <BoomBox color="#111827" size={20} />
