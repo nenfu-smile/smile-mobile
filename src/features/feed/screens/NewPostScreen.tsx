@@ -47,7 +47,8 @@ export function NewPostScreen() {
   const { pickImage, takePhoto } = useImagePicker();
 
   const wordCount = text.trim().length ? text.trim().split(/\s+/).length : 0;
-  const canvas = CANVAS_COLORS.find((item) => item.key === colorKey) ?? CANVAS_COLORS[0];
+  const canvas =
+    CANVAS_COLORS.find((item) => item.key === colorKey) ?? CANVAS_COLORS[0];
 
   const handleBack = () => {
     if (step === "upload") {
