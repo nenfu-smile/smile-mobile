@@ -11,7 +11,12 @@ interface CreateMenuSheetProps {
 
 const ITEMS = [
   { key: "post", label: "New Post", Icon: FileText, href: "/create" as const },
-  { key: "event", label: "New Event", Icon: Calendar, href: "/event/new" as const },
+  {
+    key: "event",
+    label: "New Event",
+    Icon: Calendar,
+    href: "/event/new" as const,
+  },
   {
     key: "business",
     label: "Create Business",

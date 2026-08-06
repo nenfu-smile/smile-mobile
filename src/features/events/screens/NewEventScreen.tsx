@@ -60,10 +60,28 @@ export function NewEventScreen() {
         </View>
 
         <View className="mt-6 gap-5">
-          <FormField label="Event Title" value={title} onChangeText={setTitle} />
-          <FormField label="Date" value={date} onChangeText={setDate} placeholder="Date" />
-          <FormField label="Time" value={time} onChangeText={setTime} placeholder="Time" />
-          <FormField label="Location" value={location} onChangeText={setLocation} />
+          <FormField
+            label="Event Title"
+            value={title}
+            onChangeText={setTitle}
+          />
+          <FormField
+            label="Date"
+            value={date}
+            onChangeText={setDate}
+            placeholder="Date"
+          />
+          <FormField
+            label="Time"
+            value={time}
+            onChangeText={setTime}
+            placeholder="Time"
+          />
+          <FormField
+            label="Location"
+            value={location}
+            onChangeText={setLocation}
+          />
 
           <View>
             <FormField
@@ -83,7 +101,10 @@ export function NewEventScreen() {
             </Text>
           </View>
 
-          <Pressable onPress={() => setInterestPickerVisible(true)} className="relative">
+          <Pressable
+            onPress={() => setInterestPickerVisible(true)}
+            className="relative"
+          >
             <FormField
               label="Interest"
               value={interests[interests.length - 1] ?? ""}
@@ -135,7 +156,9 @@ export function NewEventScreen() {
                 <Text className="text-center text-base text-neutral-500">
                   Upload a cover picture for this event
                 </Text>
-                <Text className="text-sm text-neutral-400">Size: 500 X 500</Text>
+                <Text className="text-sm text-neutral-400">
+                  Size: 500 X 500
+                </Text>
               </View>
             )}
           </Pressable>

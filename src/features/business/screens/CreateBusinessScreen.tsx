@@ -36,7 +36,11 @@ export function CreateBusinessScreen() {
         </View>
 
         <View className="mt-6 gap-5">
-          <FormField label="Business name" value={name} onChangeText={setName} />
+          <FormField
+            label="Business name"
+            value={name}
+            onChangeText={setName}
+          />
           <FormField
             label="Description"
             value={description}
@@ -46,7 +50,9 @@ export function CreateBusinessScreen() {
           />
 
           <View className="gap-2">
-            <Text className="text-base font-bold text-neutral-900">Category</Text>
+            <Text className="text-base font-bold text-neutral-900">
+              Category
+            </Text>
             <View className="flex-row flex-wrap gap-2">
               {CATEGORIES.map((item) => (
                 <Pressable
@@ -63,9 +69,7 @@ export function CreateBusinessScreen() {
                   <Text
                     className={cn(
                       "text-sm font-medium",
-                      category === item.key
-                        ? "text-white"
-                        : "text-neutral-900",
+                      category === item.key ? "text-white" : "text-neutral-900",
                     )}
                   >
                     {item.label}
@@ -75,7 +79,11 @@ export function CreateBusinessScreen() {
             </View>
           </View>
 
-          <FormField label="Address" value={address} onChangeText={setAddress} />
+          <FormField
+            label="Address"
+            value={address}
+            onChangeText={setAddress}
+          />
 
           <View className="flex-row gap-4">
             <FormField
