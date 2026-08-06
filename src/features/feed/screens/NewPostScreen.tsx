@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { Camera, Image as ImageIcon, MapPin } from "lucide-react-native";
+import { Camera, Eye, Image as ImageIcon, MapPin } from "lucide-react-native";
 import { useState } from "react";
 import {
   Image,
@@ -189,7 +189,7 @@ export function NewPostScreen() {
                 onPress={() => setOnlyVisibleToYou((value) => !value)}
                 className="flex-row items-center gap-3 p-4"
               >
-                <Camera color="#111827" size={18} />
+                <Eye color="#111827" size={18} />
                 <Text className="flex-1 text-base text-neutral-900">
                   Only visible to you
                 </Text>
