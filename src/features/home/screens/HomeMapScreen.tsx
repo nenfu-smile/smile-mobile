@@ -32,7 +32,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { BroadcastSheet } from "@/features/home/components/BroadcastSheet";
 import { LivePresenceSheet } from "@/features/home/components/LivePresenceSheet";
-import { MUTED_MAP_STYLE } from "@/features/home/data/map-style";
 import {
   JERICHO_REGION,
   MOCK_NEARBY_PEOPLE,
@@ -108,7 +107,6 @@ export function HomeMapScreen() {
         onRegionChangeComplete={setRegion}
         showsUserLocation={locationGranted}
         showsMyLocationButton={false}
-        customMapStyle={MUTED_MAP_STYLE}
       >
         <Circle
           center={{

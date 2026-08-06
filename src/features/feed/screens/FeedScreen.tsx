@@ -1,12 +1,14 @@
 import { CircleEllipsis, Heart, MessageCircle, Send, SlidersHorizontal } from "lucide-react-native";
 import { useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { CommentsSheet } from "@/features/feed/components/CommentsSheet";
 import { FilterSheet } from "@/features/feed/components/FilterSheet";
 import { PostOptionsSheet } from "@/features/feed/components/PostOptionsSheet";
 import { MOCK_POSTS, type FeedPost } from "@/features/feed/data/mock-posts";
+
+const POST_IMAGE = require("@/assets/images/post.jpg");
 
 function initials(name: string) {
   return name
