@@ -1,6 +1,5 @@
 import { router } from "expo-router";
-import { ShieldCheck } from "lucide-react-native";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { BackButton } from "@/shared/components/ui/back-button";
@@ -14,12 +13,14 @@ export function RecoverSuccessScreen() {
       </SafeAreaView>
 
       <View className="items-center justify-center flex-1">
-        <View className="items-center justify-center rounded-full h-28 w-28 bg-white/20">
-          <ShieldCheck color="white" size={56} />
-        </View>
+        <Image
+          source={require("@/assets/images/nice.png")}
+          resizeMode="contain"
+          className="h-40 w-40"
+        />
       </View>
 
-      <View className="gap-3 rounded-t-[40px] bg-white px-6 pb-12 pt-1">
+      <View className="h-1/2 gap-3 rounded-t-[40px] bg-white px-6 pb-12 pt-1">
         <Text className="text-3xl font-bold text-center text-neutral-900">
           Nice!
         </Text>
