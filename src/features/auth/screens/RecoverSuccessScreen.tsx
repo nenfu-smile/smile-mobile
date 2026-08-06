@@ -16,23 +16,25 @@ export function RecoverSuccessScreen() {
         <Image
           source={require("@/assets/images/nice.png")}
           resizeMode="contain"
-          className="h-40 w-40"
+          className="w-40 h-40"
         />
       </View>
 
-      <View className="h-1/2 gap-3 rounded-t-[40px] bg-white px-6 pb-12 pt-1">
-        <Text className="text-3xl font-bold text-center text-neutral-900">
-          Nice!
-        </Text>
-        <Text className="text-base text-center text-neutral-500">
-          Your mobile number has been changed successfully. You can now login
-          with your new number.
-        </Text>
+      <View className="h-1/2 rounded-t-[40px] bg-white px-6 pb-12 pt-16">
+        <View className="flex-1 gap-3">
+          <Text className="text-3xl font-bold text-center text-neutral-900">
+            Nice!
+          </Text>
+          <Text className="text-base text-center text-neutral-500">
+            Your mobile number has been changed successfully. You can now login
+            with your new number.
+          </Text>
+        </View>
 
         <PillArrowButton
           label="Get started"
           onPress={() => router.replace("/auth/login")}
-          className="mt-6 bg-neutral-100"
+          className="bg-neutral-100"
         />
       </View>
     </View>
