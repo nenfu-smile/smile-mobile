@@ -18,7 +18,7 @@ export function FullNameScreen() {
         <PrimaryButton
           label="Next"
           disabled={fullName.trim().length === 0}
-          onPress={() => router.push("/auth/signup/phone")}
+          onPress={() => router.push("/auth/signup/photo")}
         />
       }
     >

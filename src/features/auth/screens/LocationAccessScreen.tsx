@@ -27,7 +27,7 @@ export function LocationAccessScreen() {
       }
     } finally {
       setRequesting(false);
-      router.push("/auth/signup/interests");
+      router.replace("/home");
     }
   };
 

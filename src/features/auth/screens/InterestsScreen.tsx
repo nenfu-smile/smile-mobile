@@ -20,7 +20,7 @@ export function InterestsScreen() {
         <PrimaryButton
           label="Next"
           disabled={interests.length === 0}
-          onPress={() => router.push("/auth/signup/photo")}
+          onPress={() => router.push("/auth/signup/location")}
         />
       }
     >

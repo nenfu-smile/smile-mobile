@@ -10,7 +10,7 @@ export function SignupVerifyPhoneScreen() {
   return (
     <PhoneOtpCard
       phoneLabel={`${countryDialCode} ${phoneNumber || "your number"}`}
-      onVerified={() => router.push("/auth/signup/location")}
+      onVerified={() => router.push("/auth/signup/name")}
     />
   );
 }

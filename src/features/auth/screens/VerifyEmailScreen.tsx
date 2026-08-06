@@ -20,7 +20,7 @@ export function VerifyEmailScreen() {
         <PrimaryButton
           label="Verify Code"
           disabled={code.length < 5}
-          onPress={() => router.push("/auth/signup/name")}
+          onPress={() => router.push("/auth/signup/phone")}
         />
       }>
       <OtpInput value={code} onChange={setCode} />
