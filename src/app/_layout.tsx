@@ -5,6 +5,8 @@ import * as SplashScreen from "expo-splash-screen";
 //import { Toaster } from "sonner-native";
 import "../../global.css";
 
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import { DEFAULT_FONT_FAMILY } from "@/shared/config/default-font";
 
 SplashScreen.preventAutoHideAsync();
@@ -18,12 +20,14 @@ export default function TabLayout() {
   if (!fontsLoaded) return null;
 
   return (
-    <ThemeProvider value={DefaultTheme}>
-      <PortalHost />
-      <Stack screenOptions={{ headerShown: false }} />
-      {/* <AnimatedSplashOverlay /> */}
-      {/* <AppTabs /> */}
-      {/* <Toaster /> */}
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider value={DefaultTheme}>
+        <PortalHost />
+        <Stack screenOptions={{ headerShown: false }} />
+        {/* <AnimatedSplashOverlay /> */}
+        {/* <AppTabs /> */}
+        {/* <Toaster /> */}
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

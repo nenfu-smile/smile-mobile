@@ -1,13 +1,20 @@
 import { FlashList } from "@shopify/flash-list";
 import { Link, router } from "expo-router";
 import { Search, Trash2 } from "lucide-react-native";
+import { cssInterop } from "nativewind";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
+import {
+  Pressable as GestureHandlerPressable,
+  Swipeable,
+} from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_CHATS, type ChatListItem } from "@/features/chat/data/mock-chats";
 import { cn } from "@/lib/utils";
 import { ConfirmDeleteModal } from "@/shared/components/ui/confirm-delete-modal";
+
+cssInterop(GestureHandlerPressable, { className: "style" });
 
 type Filter = "group" | "user";
 
@@ -70,45 +77,58 @@ export function ChatListScreen() {
         data={filtered}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Link href={`/chat/${item.id}`} asChild>
-            <Pressable className="flex-row items-center gap-3 mb-3">
-              <View className="relative">
-                <View
-                  className="items-center justify-center rounded-full h-14 w-14"
-                  style={{ backgroundColor: item.avatarColor }}
+          <View className="mb-3">
+            <Swipeable
+              renderRightActions={() => (
+                <GestureHandlerPressable
+                  onPress={() => setPendingDelete(item)}
+                  className="ml-3 h-14 w-14 items-center justify-center rounded-2xl bg-red-100"
                 >
-                  <Text className="text-base font-semibold text-white">
-                    {initials(item.name)}
-                  </Text>
-                </View>
-                {item.unreadCount ? (
-                  <View className="absolute items-center justify-center w-5 h-5 rounded-full -right-1 -top-1 bg-primary">
-                    <Text className="text-xs font-bold text-white">
-                      {item.unreadCount}
+                  <Trash2 color="#EF4444" size={20} />
+                </GestureHandlerPressable>
+              )}
+              overshootRight={false}
+            >
+              <Link href={`/chat/${item.id}`} asChild>
+                <Pressable className="flex-row items-center gap-3">
+                  <View className="relative">
+                    <View
+                      className="items-center justify-center rounded-full h-14 w-14"
+                      style={{ backgroundColor: item.avatarColor }}
+                    >
+                      <Text className="text-base font-semibold text-white">
+                        {initials(item.name)}
+                      </Text>
+                    </View>
+                    {item.unreadCount ? (
+                      <View className="absolute items-center justify-center w-5 h-5 rounded-full -right-1 -top-1 bg-primary">
+                        <Text className="text-xs font-bold text-white">
+                          {item.unreadCount}
+                        </Text>
+                      </View>
+                    ) : null}
+                  </View>
+
+                  <View className="flex-1">
+                    <View className="flex-row items-center justify-between">
+                      <Text className="text-base font-semibold text-neutral-900">
+                        {item.name}
+                      </Text>
+                      <Text className="text-sm text-neutral-400">
+                        {item.timestamp}
+                      </Text>
+                    </View>
+                    <Text
+                      className="text-sm text-neutral-500"
+                      numberOfLines={1}
+                    >
+                      {item.lastMessage}
                     </Text>
                   </View>
-                ) : null}
-              </View>
-
-              <View className="flex-1">
-                <View className="flex-row items-center justify-between">
-                  <Text className="text-base font-semibold text-neutral-900">
-                    {item.name}
-                  </Text>
-                  <Text className="text-sm text-neutral-400">
-                    {item.timestamp}
-                  </Text>
-                </View>
-                <Text className="text-sm text-neutral-500" numberOfLines={1}>
-                  {item.lastMessage}
-                </Text>
-              </View>
-
-              <Pressable onPress={() => setPendingDelete(item)} className="p-2">
-                <Trash2 color="#D1D5DB" size={18} />
-              </Pressable>
-            </Pressable>
-          </Link>
+                </Pressable>
+              </Link>
+            </Swipeable>
+          </View>
         )}
       />
 
