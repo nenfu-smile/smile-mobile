@@ -3,7 +3,7 @@ import { Link, router } from "expo-router";
 import { Search, Trash2 } from "lucide-react-native";
 import { cssInterop } from "nativewind";
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import {
   Pressable as GestureHandlerPressable,
   Swipeable,
@@ -81,8 +81,11 @@ export function ChatListScreen() {
             <Swipeable
               renderRightActions={() => (
                 <GestureHandlerPressable
-                  onPress={() => setPendingDelete(item)}
-                  className="ml-3 h-14 w-14 items-center justify-center rounded-2xl bg-red-100"
+                  onPress={() => {
+                    setPendingDelete(item);
+                    console.log("Delete pressed for", item.name);
+                  }}
+                  className="items-center justify-center ml-3 bg-red-100 h-14 w-14 rounded-2xl"
                 >
                   <Trash2 color="#EF4444" size={20} />
                 </GestureHandlerPressable>
@@ -90,7 +93,7 @@ export function ChatListScreen() {
               overshootRight={false}
             >
               <Link href={`/chat/${item.id}`} asChild>
-                <Pressable className="flex-row items-center gap-3">
+                <TouchableOpacity className="flex-row items-center gap-3">
                   <View className="relative">
                     <View
                       className="items-center justify-center rounded-full h-14 w-14"
@@ -125,7 +128,7 @@ export function ChatListScreen() {
                       {item.lastMessage}
                     </Text>
                   </View>
-                </Pressable>
+                </TouchableOpacity>
               </Link>
             </Swipeable>
           </View>
