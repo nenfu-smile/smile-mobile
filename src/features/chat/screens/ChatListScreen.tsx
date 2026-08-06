@@ -3,14 +3,15 @@ import { Link, router } from "expo-router";
 import { Search, Trash2 } from "lucide-react-native";
 import { cssInterop } from "nativewind";
 import { useState } from "react";
-import { Pressable, Text, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
 import {
   Pressable as GestureHandlerPressable,
   Swipeable,
 } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MOCK_CHATS, type ChatListItem } from "@/features/chat/data/mock-chats";
+import { type ChatListItem } from "@/features/chat/data/mock-chats";
+import { useChatsStore } from "@/features/chat/store/chats-store";
 import { cn } from "@/lib/utils";
 import { ConfirmDeleteModal } from "@/shared/components/ui/confirm-delete-modal";
 
@@ -29,7 +30,8 @@ function initials(name: string) {
 
 export function ChatListScreen() {
   const [filter, setFilter] = useState<Filter>("group");
-  const [chats, setChats] = useState(MOCK_CHATS);
+  const chats = useChatsStore((state) => state.chats);
+  const deleteChat = useChatsStore((state) => state.deleteChat);
   const [pendingDelete, setPendingDelete] = useState<ChatListItem | null>(null);
 
   const filtered = chats.filter((chat) => chat.type === filter);
@@ -76,15 +78,12 @@ export function ChatListScreen() {
         className="mt-8"
         data={filtered}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
+        renderItem={({ item }: { item: ChatListItem }) => (
           <View className="mb-3">
             <Swipeable
               renderRightActions={() => (
                 <GestureHandlerPressable
-                  onPress={() => {
-                    setPendingDelete(item);
-                    console.log("Delete pressed for", item.name);
-                  }}
+                  onPress={() => setPendingDelete(item)}
                   className="items-center justify-center ml-3 bg-red-100 h-14 w-14 rounded-2xl"
                 >
                   <Trash2 color="#EF4444" size={20} />
@@ -96,12 +95,16 @@ export function ChatListScreen() {
                 <TouchableOpacity className="flex-row items-center gap-3">
                   <View className="relative">
                     <View
-                      className="items-center justify-center rounded-full h-14 w-14"
+                      className="items-center justify-center overflow-hidden rounded-full h-14 w-14"
                       style={{ backgroundColor: item.avatarColor }}
                     >
-                      <Text className="text-base font-semibold text-white">
-                        {initials(item.name)}
-                      </Text>
+                      {item.avatarImage ? (
+                        <Image source={item.avatarImage} className="h-full w-full" />
+                      ) : (
+                        <Text className="text-base font-semibold text-white">
+                          {initials(item.name)}
+                        </Text>
+                      )}
                     </View>
                     {item.unreadCount ? (
                       <View className="absolute items-center justify-center w-5 h-5 rounded-full -right-1 -top-1 bg-primary">
@@ -139,9 +142,7 @@ export function ChatListScreen() {
         visible={pendingDelete != null}
         onCancel={() => setPendingDelete(null)}
         onConfirm={() => {
-          setChats((current) =>
-            current.filter((chat) => chat.id !== pendingDelete?.id),
-          );
+          if (pendingDelete) deleteChat(pendingDelete.id);
           setPendingDelete(null);
         }}
       />
