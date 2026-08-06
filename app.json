@@ -37,6 +37,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "43b40003-a2c6-4461-b21e-635b0f5a1d5d"
+      }
+    },
+    "owner": "arome.dev2"
   }
 }
