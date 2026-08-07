@@ -4,7 +4,7 @@ import MapView, { Circle, Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MOCK_OWN_POSTS, MOCK_SELF_PROFILE } from "@/features/people/data/mock-people";
-import { JERICHO_REGION } from "@/features/home/data/mock-nearby-people";
+import { DEFAULT_REGION } from "@/features/home/data/mock-nearby-people";
 import { BackButton } from "@/shared/components/ui/back-button";
 
 const POST_OFFSETS: Array<{ latitude: number; longitude: number }> = [
@@ -27,9 +27,9 @@ export function PostsMapScreen() {
       <MapView
         provider={PROVIDER_DEFAULT}
         style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
-        initialRegion={JERICHO_REGION}>
+        initialRegion={DEFAULT_REGION}>
         <Circle
-          center={{ latitude: JERICHO_REGION.latitude, longitude: JERICHO_REGION.longitude }}
+          center={{ latitude: DEFAULT_REGION.latitude, longitude: DEFAULT_REGION.longitude }}
           radius={550}
           strokeColor="#FF660A"
           strokeWidth={2}
@@ -42,8 +42,8 @@ export function PostsMapScreen() {
             <Marker
               key={post.id}
               coordinate={{
-                latitude: JERICHO_REGION.latitude + offset.latitude,
-                longitude: JERICHO_REGION.longitude + offset.longitude,
+                latitude: DEFAULT_REGION.latitude + offset.latitude,
+                longitude: DEFAULT_REGION.longitude + offset.longitude,
               }}
               onPress={() => setSelectedId(post.id)}>
               <View className="items-center">
