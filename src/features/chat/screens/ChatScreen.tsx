@@ -49,7 +49,7 @@ export function ChatScreen() {
   };
 
   return (
-    <SafeAreaView edges={["top"]} className="flex-1 bg-white">
+    <SafeAreaView edges={["top", "bottom"]} className="flex-1 bg-white">
       <View className="flex-row items-center gap-3 px-4 pt-2 pb-3 border-b border-neutral-100">
         <BackButton />
 

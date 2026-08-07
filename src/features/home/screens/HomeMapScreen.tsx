@@ -5,10 +5,12 @@ import {
   ArrowRight,
   Bell,
   BoomBox,
+  Calendar,
   Map,
   MapPin,
   Radio,
   Search,
+  ShoppingBag,
   SlidersHorizontal,
   Star,
   Users,
@@ -36,10 +38,13 @@ import {
   DEFAULT_REGION,
   MOCK_NEARBY_PEOPLE,
 } from "@/features/home/data/mock-nearby-people";
+import { MOCK_BUSINESSES } from "@/features/business/data/mock-businesses";
+import { MOCK_EVENTS_LIST } from "@/features/events/data/mock-events";
 import { cn } from "@/lib/utils";
 import { IconCircleButton } from "@/shared/components/ui/icon-circle-button";
 import { AddButton } from "@/shared/components/ui/list-row";
 import { MapPersonMarker } from "@/shared/components/ui/map-person-marker";
+import { MapPinMarker } from "@/shared/components/ui/map-pin-marker";
 
 const FILTERS = ["All", "People", "Events", "Business", "Presence"];
 
@@ -71,6 +76,46 @@ export function HomeMapScreen() {
     2,
     Math.max(0.5, DEFAULT_REGION.latitudeDelta / region.latitudeDelta),
   );
+
+  const showPeople =
+    filter === "All" || filter === "People" || filter === "Presence";
+  const showEvents = filter === "All" || filter === "Events";
+  const showBusiness = filter === "All" || filter === "Business";
+
+  const previewItem =
+    filter === "Events"
+      ? MOCK_EVENTS_LIST[0] && {
+          key: MOCK_EVENTS_LIST[0].id,
+          title: MOCK_EVENTS_LIST[0].name,
+          subtitle: MOCK_EVENTS_LIST[0].address,
+          distance: MOCK_EVENTS_LIST[0].distance,
+          color: MOCK_EVENTS_LIST[0].avatarColor,
+          icon: <Calendar color="white" size={22} />,
+          href: `/event/${MOCK_EVENTS_LIST[0].id}` as const,
+        }
+      : filter === "Business"
+        ? MOCK_BUSINESSES[0] && {
+            key: MOCK_BUSINESSES[0].id,
+            title: MOCK_BUSINESSES[0].name,
+            subtitle: MOCK_BUSINESSES[0].address,
+            distance: MOCK_BUSINESSES[0].distance,
+            color: MOCK_BUSINESSES[0].avatarColor,
+            icon: <ShoppingBag color="white" size={22} />,
+            href: null,
+          }
+        : previewPerson && {
+            key: previewPerson.id,
+            title: previewPerson.name,
+            subtitle: previewPerson.address,
+            distance: previewPerson.distance,
+            color: previewPerson.avatarColor,
+            icon: (
+              <Text className="font-semibold text-white">
+                {initials(previewPerson.name)}
+              </Text>
+            ),
+            href: `/people/${previewPerson.id}` as const,
+          };
 
   const zoom = (factor: number) => {
     const next = {
@@ -145,21 +190,56 @@ export function HomeMapScreen() {
           strokeWidth={2}
           fillColor="rgba(255,102,10,0.08)"
         />
-        {MOCK_NEARBY_PEOPLE.map((person) => (
-          <Marker
-            key={person.id}
-            coordinate={{
-              latitude: center.latitude + person.offset.latitude,
-              longitude: center.longitude + person.offset.longitude,
-            }}
-          >
-            <MapPersonMarker
-              name={person.name}
-              avatarColor={person.avatarColor}
-              scale={markerScale}
-            />
-          </Marker>
-        ))}
+        {showPeople &&
+          MOCK_NEARBY_PEOPLE.map((person) => (
+            <Marker
+              key={person.id}
+              coordinate={{
+                latitude: center.latitude + person.offset.latitude,
+                longitude: center.longitude + person.offset.longitude,
+              }}
+            >
+              <MapPersonMarker
+                name={person.name}
+                avatarColor={person.avatarColor}
+                scale={markerScale}
+              />
+            </Marker>
+          ))}
+        {showEvents &&
+          MOCK_EVENTS_LIST.map((event) => (
+            <Marker
+              key={event.id}
+              coordinate={{
+                latitude: center.latitude + event.offset.latitude,
+                longitude: center.longitude + event.offset.longitude,
+              }}
+            >
+              <MapPinMarker
+                label={event.name}
+                color={event.avatarColor}
+                icon={<Calendar color="white" size={20} />}
+                scale={markerScale}
+              />
+            </Marker>
+          ))}
+        {showBusiness &&
+          MOCK_BUSINESSES.map((business) => (
+            <Marker
+              key={business.id}
+              coordinate={{
+                latitude: center.latitude + business.offset.latitude,
+                longitude: center.longitude + business.offset.longitude,
+              }}
+            >
+              <MapPinMarker
+                label={business.name}
+                color={business.avatarColor}
+                icon={<ShoppingBag color="white" size={20} />}
+                scale={markerScale}
+              />
+            </Marker>
+          ))}
       </MapView>
 
       <SafeAreaView edges={["top"]} className="gap-3 px-4 pt-2 bg-white">
@@ -282,34 +362,38 @@ export function HomeMapScreen() {
         </View>
       </View>
 
-      <Pressable
-        onPress={() => router.push(`/people/${previewPerson.id}`)}
-        className="absolute flex-row items-center gap-3 p-3 bg-white inset-x-4 bottom-28 rounded-2xl active:opacity-80"
-      >
-        <View
-          className="items-center justify-center rounded-full h-14 w-14"
-          style={{ backgroundColor: previewPerson.avatarColor }}
+      {previewItem ? (
+        <Pressable
+          onPress={() => previewItem.href && router.push(previewItem.href)}
+          className="absolute flex-row items-center gap-3 p-3 bg-white inset-x-4 bottom-28 rounded-2xl active:opacity-80"
         >
-          <Text className="font-semibold text-white">
-            {initials(previewPerson.name)}
-          </Text>
-        </View>
-        <View className="flex-1">
-          <Text className="font-semibold text-neutral-900">
-            {previewPerson.name}
-          </Text>
-          <Text className="text-sm text-neutral-500">
-            {previewPerson.address}
-          </Text>
-          <View className="mt-0.5 flex-row items-center gap-1">
-            <MapPin color="#9CA3AF" size={12} />
-            <Text className="text-sm text-neutral-500">
-              {previewPerson.distance}
-            </Text>
+          <View
+            className="items-center justify-center rounded-full h-14 w-14"
+            style={{ backgroundColor: previewItem.color }}
+          >
+            {previewItem.icon}
           </View>
-        </View>
-        <AddButton />
-      </Pressable>
+          <View className="flex-1">
+            <Text className="font-semibold text-neutral-900">
+              {previewItem.title}
+            </Text>
+            <Text className="text-sm text-neutral-500">
+              {previewItem.subtitle}
+            </Text>
+            <View className="mt-0.5 flex-row items-center gap-1">
+              <MapPin color="#9CA3AF" size={12} />
+              <Text className="text-sm text-neutral-500">
+                {previewItem.distance}
+              </Text>
+            </View>
+          </View>
+          {previewItem.href ? (
+            <AddButton />
+          ) : (
+            <ArrowRight color="#9CA3AF" size={18} />
+          )}
+        </Pressable>
+      ) : null}
 
       <BroadcastSheet
         visible={broadcastVisible}

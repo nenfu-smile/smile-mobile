@@ -19,12 +19,43 @@ export interface EventDetails {
 }
 
 export const MOCK_ATTENDEES: EventAttendee[] = [
-  { id: "1", name: "Bad and Boujee", distance: "900m away", avatarColor: "#1F2937", added: true },
-  { id: "2", name: "Bad and Boujee", distance: "900m away", avatarColor: "#7C3AED" },
-  { id: "3", name: "Bad and Boujee", distance: "900m away", avatarColor: "#7C3AED" },
-  { id: "4", name: "Bad and Boujee", distance: "900m away", avatarColor: "#7C3AED" },
-  { id: "5", name: "Bad and Boujee", distance: "900m away", avatarColor: "#7C3AED" },
-  { id: "6", name: "Bad and Boujee", distance: "900m away", avatarColor: "#7C3AED" },
+  {
+    id: "1",
+    name: "Bad and Boujee",
+    distance: "900m away",
+    avatarColor: "#1F2937",
+    added: true,
+  },
+  {
+    id: "2",
+    name: "Bad and Boujee",
+    distance: "900m away",
+    avatarColor: "#7C3AED",
+  },
+  {
+    id: "3",
+    name: "Bad and Boujee",
+    distance: "900m away",
+    avatarColor: "#7C3AED",
+  },
+  {
+    id: "4",
+    name: "Bad and Boujee",
+    distance: "900m away",
+    avatarColor: "#7C3AED",
+  },
+  {
+    id: "5",
+    name: "Bad and Boujee",
+    distance: "900m away",
+    avatarColor: "#7C3AED",
+  },
+  {
+    id: "6",
+    name: "Bad and Boujee",
+    distance: "900m away",
+    avatarColor: "#7C3AED",
+  },
 ];
 
 export const MOCK_EVENT: EventDetails = {
@@ -34,7 +65,7 @@ export const MOCK_EVENT: EventDetails = {
   date: "15-09-2024",
   time: "9:00AM -6:00PM",
   about:
-    'Tech enthusiasts to discuss the latest trends in AI and blockchain technology. Join tech enthusiasts for a day of talks, demos, and networking.',
+    "Tech enthusiasts to discuss the latest trends in AI and blockchain technology. Join tech enthusiasts for a day of talks, demos, and networking.",
   interests: ["Techmeetup", "Events", "#Socializing"],
   attendeeCount: 234,
   attendees: MOCK_ATTENDEES,
@@ -47,14 +78,51 @@ export interface EventListItem {
   distance: string;
   avatarColor: string;
   trending?: boolean;
+  offset: { latitude: number; longitude: number };
 }
 
 export const MOCK_EVENTS_LIST: EventListItem[] = [
-  { id: "1", name: "Ibadan Tech Expo", address: "Ojoo Alegongon Ibadan.", distance: "900m away", avatarColor: "#1E293B", trending: true },
-  { id: "2", name: "Startup Grind", address: "Ojoo Alegongon Ibadan.", distance: "900m away", avatarColor: "#78350F" },
-  { id: "3", name: "Devfest Ibadan", address: "Ojoo Alegongon Ibadan.", distance: "900m away", avatarColor: "#4C1D95" },
-  { id: "4", name: "Picnic Gathering", address: "Ojoo Alegongon Ibadan.", distance: "900m away", avatarColor: "#92400E" },
-  { id: "5", name: "Linkedin Oyo", address: "Ojoo Alegongon Ibadan.", distance: "900m away", avatarColor: "#3F3F46" },
+  {
+    id: "1",
+    name: "Ibadan Tech Expo",
+    address: "Ojoo Alegongon Ibadan.",
+    distance: "900m away",
+    avatarColor: "#1E293B",
+    trending: true,
+    offset: { latitude: 0.0022, longitude: -0.0004 },
+  },
+  {
+    id: "2",
+    name: "Startup Grind",
+    address: "Ojoo Alegongon Ibadan.",
+    distance: "900m away",
+    avatarColor: "#78350F",
+    offset: { latitude: -0.0008, longitude: 0.0026 },
+  },
+  {
+    id: "3",
+    name: "Devfest Ibadan",
+    address: "Ojoo Alegongon Ibadan.",
+    distance: "900m away",
+    avatarColor: "#4C1D95",
+    offset: { latitude: 0.0006, longitude: -0.0024 },
+  },
+  {
+    id: "4",
+    name: "Picnic Gathering",
+    address: "Ojoo Alegongon Ibadan.",
+    distance: "900m away",
+    avatarColor: "#92400E",
+    offset: { latitude: -0.0021, longitude: 0.0012 },
+  },
+  {
+    id: "5",
+    name: "Linkedin Oyo",
+    address: "Ojoo Alegongon Ibadan.",
+    distance: "900m away",
+    avatarColor: "#3F3F46",
+    offset: { latitude: 0.0011, longitude: 0.0018 },
+  },
 ];
 
 export const MOCK_EVENT_SEARCH_RESULTS = [
