@@ -97,14 +97,24 @@ export function HomeMapScreen() {
         accuracy: Location.Accuracy.Balanced,
       });
       const { latitude, longitude } = position.coords;
-      const next = { latitude, longitude, latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta };
+      const next = {
+        latitude,
+        longitude,
+        latitudeDelta: region.latitudeDelta,
+        longitudeDelta: region.longitudeDelta,
+      };
       mapRef.current?.animateToRegion(next, 500);
       setRegion(next);
       setCenter({ latitude, longitude });
 
       try {
-        const [place] = await Location.reverseGeocodeAsync({ latitude, longitude });
-        setAreaName(place?.district || place?.subregion || place?.city || "Nearby");
+        const [place] = await Location.reverseGeocodeAsync({
+          latitude,
+          longitude,
+        });
+        setAreaName(
+          place?.district || place?.subregion || place?.city || "Nearby",
+        );
       } catch {
         setAreaName("Nearby");
       }

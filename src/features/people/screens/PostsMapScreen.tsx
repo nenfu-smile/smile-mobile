@@ -3,7 +3,10 @@ import { Text, View } from "react-native";
 import MapView, { Circle, Marker, PROVIDER_DEFAULT } from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MOCK_OWN_POSTS, MOCK_SELF_PROFILE } from "@/features/people/data/mock-people";
+import {
+  MOCK_OWN_POSTS,
+  MOCK_SELF_PROFILE,
+} from "@/features/people/data/mock-people";
 import { DEFAULT_REGION } from "@/features/home/data/mock-nearby-people";
 import { BackButton } from "@/shared/components/ui/back-button";
 
@@ -27,9 +30,13 @@ export function PostsMapScreen() {
       <MapView
         provider={PROVIDER_DEFAULT}
         style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
-        initialRegion={DEFAULT_REGION}>
+        initialRegion={DEFAULT_REGION}
+      >
         <Circle
-          center={{ latitude: DEFAULT_REGION.latitude, longitude: DEFAULT_REGION.longitude }}
+          center={{
+            latitude: DEFAULT_REGION.latitude,
+            longitude: DEFAULT_REGION.longitude,
+          }}
           radius={550}
           strokeColor="#FF660A"
           strokeWidth={2}
@@ -45,17 +52,23 @@ export function PostsMapScreen() {
                 latitude: DEFAULT_REGION.latitude + offset.latitude,
                 longitude: DEFAULT_REGION.longitude + offset.longitude,
               }}
-              onPress={() => setSelectedId(post.id)}>
+              onPress={() => setSelectedId(post.id)}
+            >
               <View className="items-center">
                 <View
                   className="h-16 w-16 items-center justify-center rounded-2xl border-2 border-primary"
-                  style={{ backgroundColor: isSelected ? "#FF660A" : post.color }}>
+                  style={{
+                    backgroundColor: isSelected ? "#FF660A" : post.color,
+                  }}
+                >
                   {isSelected ? (
                     <Text className="text-2xl font-bold text-white">Tt</Text>
                   ) : null}
                 </View>
                 <View className="mt-1 rounded-full bg-white px-2 py-0.5">
-                  <Text className="text-xs text-neutral-900">{MOCK_SELF_PROFILE.name}</Text>
+                  <Text className="text-xs text-neutral-900">
+                    {MOCK_SELF_PROFILE.name}
+                  </Text>
                 </View>
               </View>
             </Marker>
