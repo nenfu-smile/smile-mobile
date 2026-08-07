@@ -14,7 +14,7 @@ import {
   Users,
   Webcam,
 } from "lucide-react-native";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -33,7 +33,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { BroadcastSheet } from "@/features/home/components/BroadcastSheet";
 import { LivePresenceSheet } from "@/features/home/components/LivePresenceSheet";
 import {
-  JERICHO_REGION,
+  DEFAULT_REGION,
   MOCK_NEARBY_PEOPLE,
 } from "@/features/home/data/mock-nearby-people";
 import { cn } from "@/lib/utils";
@@ -41,7 +41,7 @@ import { IconCircleButton } from "@/shared/components/ui/icon-circle-button";
 import { AddButton } from "@/shared/components/ui/list-row";
 import { MapPersonMarker } from "@/shared/components/ui/map-person-marker";
 
-const FILTERS = ["All", "Friends", "Events", "Business"];
+const FILTERS = ["All", "People", "Events", "Business", "Presence"];
 
 function initials(name: string) {
   return name
@@ -54,7 +54,12 @@ function initials(name: string) {
 
 export function HomeMapScreen() {
   const mapRef = useRef<MapView>(null);
-  const [region, setRegion] = useState<Region>(JERICHO_REGION);
+  const [region, setRegion] = useState<Region>(DEFAULT_REGION);
+  const [center, setCenter] = useState({
+    latitude: DEFAULT_REGION.latitude,
+    longitude: DEFAULT_REGION.longitude,
+  });
+  const [areaName, setAreaName] = useState("Locating...");
   const [filter, setFilter] = useState("All");
   const [broadcastVisible, setBroadcastVisible] = useState(false);
   const [livePresenceVisible, setLivePresenceVisible] = useState(false);
@@ -62,6 +67,10 @@ export function HomeMapScreen() {
   const [locationGranted, setLocationGranted] = useState(false);
 
   const previewPerson = MOCK_NEARBY_PEOPLE[MOCK_NEARBY_PEOPLE.length - 2];
+  const markerScale = Math.min(
+    2,
+    Math.max(0.5, DEFAULT_REGION.latitudeDelta / region.latitudeDelta),
+  );
 
   const zoom = (factor: number) => {
     const next = {
@@ -78,24 +87,35 @@ export function HomeMapScreen() {
     setLocating(true);
     try {
       const permission = await Location.requestForegroundPermissionsAsync();
-      if (!permission.granted) return;
+      if (!permission.granted) {
+        setAreaName("Nearby");
+        return;
+      }
       setLocationGranted(true);
 
       const position = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.Balanced,
       });
-      const next = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        latitudeDelta: region.latitudeDelta,
-        longitudeDelta: region.longitudeDelta,
-      };
+      const { latitude, longitude } = position.coords;
+      const next = { latitude, longitude, latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta };
       mapRef.current?.animateToRegion(next, 500);
       setRegion(next);
+      setCenter({ latitude, longitude });
+
+      try {
+        const [place] = await Location.reverseGeocodeAsync({ latitude, longitude });
+        setAreaName(place?.district || place?.subregion || place?.city || "Nearby");
+      } catch {
+        setAreaName("Nearby");
+      }
     } finally {
       setLocating(false);
     }
   };
+
+  useEffect(() => {
+    locateMe();
+  }, []);
 
   return (
     <View className="flex-1 bg-white">
@@ -103,26 +123,30 @@ export function HomeMapScreen() {
         ref={mapRef}
         provider={PROVIDER_GOOGLE}
         style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
-        initialRegion={JERICHO_REGION}
+        initialRegion={DEFAULT_REGION}
         onRegionChangeComplete={setRegion}
         showsUserLocation={locationGranted}
         showsMyLocationButton={false}
       >
         <Circle
-          center={{
-            latitude: JERICHO_REGION.latitude,
-            longitude: JERICHO_REGION.longitude,
-          }}
+          center={center}
           radius={550}
           strokeColor="#FF660A"
           strokeWidth={2}
           fillColor="rgba(255,102,10,0.08)"
         />
         {MOCK_NEARBY_PEOPLE.map((person) => (
-          <Marker key={person.id} coordinate={person.coordinate}>
+          <Marker
+            key={person.id}
+            coordinate={{
+              latitude: center.latitude + person.offset.latitude,
+              longitude: center.longitude + person.offset.longitude,
+            }}
+          >
             <MapPersonMarker
               name={person.name}
               avatarColor={person.avatarColor}
+              scale={markerScale}
             />
           </Marker>
         ))}
@@ -131,7 +155,9 @@ export function HomeMapScreen() {
       <SafeAreaView edges={["top"]} className="gap-3 px-4 pt-2 bg-white">
         <View className="flex-row items-start justify-between bg-white">
           <View>
-            <Text className="text-2xl font-bold text-neutral-900">Jericho</Text>
+            <Text className="text-2xl font-bold text-neutral-900">
+              {areaName}
+            </Text>
             <View className="flex-row items-center gap-2 mt-1">
               <View className="w-2 h-2 bg-green-500 rounded-full" />
               <Text className="text-sm text-neutral-500">Live presence</Text>
@@ -188,7 +214,7 @@ export function HomeMapScreen() {
         <View className="flex-1">
           <Text className="text-xs text-neutral-500">AI Discovery</Text>
           <Text className="text-sm font-semibold text-neutral-900">
-            3 of your friends are near Jericho
+            3 of your friends are near {areaName}
           </Text>
         </View>
         <ArrowRight color="#9CA3AF" size={18} />
